@@ -599,14 +599,14 @@ $lang = array_merge($lang, array(
 		'PLACE_INTO_FOLDER'	=> 'Place into folder',
 		'MARK_AS_READ'		=> 'Mark as read',
 		'MARK_AS_IMPORTANT'	=> 'Mark message',
-		'DELETE_MESSAGE'	=> 'Delete message'
+		'DELETE_MESSAGE'	=> 'Delete message',
 	),
 	'PM_CHECK' => array(
 		'SUBJECT'	=> 'Subject',
 		'SENDER'	=> 'Sender',
 		'MESSAGE'	=> 'Message',
 		'STATUS'	=> 'Message status',
-		'TO'		=> 'Sent To'
+		'TO'		=> 'Sent To',
 	),
 	'PM_RULE' => array(
 		'IS_LIKE'		=> 'is like',
@@ -622,7 +622,7 @@ $lang = array_merge($lang, array(
 		'ANSWERED'		=> 'answered',
 		'FORWARDED'		=> 'forwarded',
 		'TO_GROUP'		=> 'to my default usergroup',
-		'TO_ME'			=> 'to me'
+		'TO_ME'			=> 'to me',
 	),
 
 

@@ -306,7 +306,7 @@ class phpbb_recaptcha extends phpbb_default_captcha
 				'privatekey'	=> $config['recaptcha_privkey'],
 				'remoteip'		=> $user->ip,
 				'challenge'		=> $this->challenge,
-				'response'		=> $this->response
+				'response'		=> $this->response,
 			) + $extra_params
 		);
 

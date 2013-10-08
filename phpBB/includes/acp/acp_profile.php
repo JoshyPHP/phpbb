@@ -402,7 +402,7 @@ class acp_profile
 				$exclude = array(
 					1	=> array('field_ident', 'lang_name', 'lang_explain', 'field_option_none', 'field_show_on_reg', 'field_show_on_pm', 'field_show_on_vt', 'field_required', 'field_show_novalue', 'field_hide', 'field_show_profile', 'field_no_view'),
 					2	=> array('field_length', 'field_maxlen', 'field_minlen', 'field_validation', 'field_novalue', 'field_default_value'),
-					3	=> array('l_lang_name', 'l_lang_explain', 'l_lang_default_value', 'l_lang_options')
+					3	=> array('l_lang_name', 'l_lang_explain', 'l_lang_default_value', 'l_lang_options'),
 				);
 
 				// Text-based fields require the lang_default_value to be excluded
@@ -1000,7 +1000,7 @@ class acp_profile
 			$lang_options[1]['lang_iso'] = $this->lang_defs['id'][$default_lang_id];
 			$lang_options[1]['fields'][$field] = array(
 				'TITLE'		=> $user->lang['CP_' . strtoupper($field)],
-				'FIELD'		=> '<dd>' . ((is_array($cp->vars[$field])) ? implode('<br />', $cp->vars[$field]) : bbcode_nl2br($cp->vars[$field])) . '</dd>'
+				'FIELD'		=> '<dd>' . ((is_array($cp->vars[$field])) ? implode('<br />', $cp->vars[$field]) : bbcode_nl2br($cp->vars[$field])) . '</dd>',
 			);
 
 			if (isset($user->lang['CP_' . strtoupper($field) . '_EXPLAIN']))
@@ -1027,7 +1027,7 @@ class acp_profile
 								'TITLE'		=> $user->lang['CP_' . strtoupper($field)],
 								'FIELD'		=> '
 											<dd><input class="medium" name="l_' . $field . '[' . $lang_id . '][]" value="' . ((isset($value[$lang_id][0])) ? $value[$lang_id][0] : $var[0]) . '" /> ' . $user->lang['FIRST_OPTION'] . '</dd>
-											<dd><input class="medium" name="l_' . $field . '[' . $lang_id . '][]" value="' . ((isset($value[$lang_id][1])) ? $value[$lang_id][1] : $var[1]) . '" /> ' . $user->lang['SECOND_OPTION'] . '</dd>'
+											<dd><input class="medium" name="l_' . $field . '[' . $lang_id . '][]" value="' . ((isset($value[$lang_id][1])) ? $value[$lang_id][1] : $var[1]) . '" /> ' . $user->lang['SECOND_OPTION'] . '</dd>',
 							);
 						break;
 
@@ -1035,7 +1035,7 @@ class acp_profile
 							$value = ((isset($value[$lang_id])) ? ((is_array($value[$lang_id])) ?  implode("\n", $value[$lang_id]) : $value[$lang_id]) : implode("\n", $var));
 							$lang_options[$lang_id]['fields'][$field] = array(
 								'TITLE'		=> $user->lang['CP_' . strtoupper($field)],
-								'FIELD'		=> '<dd><textarea name="l_' . $field . '[' . $lang_id . ']" rows="7" cols="80">' . $value . '</textarea></dd>'
+								'FIELD'		=> '<dd><textarea name="l_' . $field . '[' . $lang_id . ']" rows="7" cols="80">' . $value . '</textarea></dd>',
 							);
 						break;
 					}
@@ -1051,7 +1051,7 @@ class acp_profile
 
 					$lang_options[$lang_id]['fields'][$field] = array(
 						'TITLE'		=> $user->lang['CP_' . strtoupper($field)],
-						'FIELD'		=> ($field_type == 'string') ? '<dd><input class="medium" type="text" name="l_' . $field . '[' . $lang_id . ']" value="' . ((isset($value[$lang_id])) ? $value[$lang_id] : $var) . '" /></dd>' : '<dd><textarea name="l_' . $field . '[' . $lang_id . ']" rows="3" cols="80">' . ((isset($value[$lang_id])) ? $value[$lang_id] : $var) . '</textarea></dd>'
+						'FIELD'		=> ($field_type == 'string') ? '<dd><input class="medium" type="text" name="l_' . $field . '[' . $lang_id . ']" value="' . ((isset($value[$lang_id])) ? $value[$lang_id] : $var) . '" /></dd>' : '<dd><textarea name="l_' . $field . '[' . $lang_id . ']" rows="3" cols="80">' . ((isset($value[$lang_id])) ? $value[$lang_id] : $var) . '</textarea></dd>',
 					);
 
 					if (isset($user->lang['CP_' . strtoupper($field) . '_EXPLAIN']))
@@ -1105,7 +1105,7 @@ class acp_profile
 			'field_show_on_vt'		=> $cp->vars['field_show_on_vt'],
 			'field_hide'			=> $cp->vars['field_hide'],
 			'field_show_profile'	=> $cp->vars['field_show_profile'],
-			'field_no_view'			=> $cp->vars['field_no_view']
+			'field_no_view'			=> $cp->vars['field_no_view'],
 		);
 
 		if ($action == 'create')
@@ -1115,7 +1115,7 @@ class acp_profile
 				'field_ident'		=> $field_ident,
 				'field_name'		=> $field_ident,
 				'field_order'		=> $new_field_order + 1,
-				'field_active'		=> 1
+				'field_active'		=> 1,
 			);
 
 			$sql = 'INSERT INTO ' . PROFILE_FIELDS_TABLE . ' ' . $db->sql_build_array('INSERT', $profile_fields);
@@ -1140,7 +1140,7 @@ class acp_profile
 		$sql_ary = array(
 			'lang_name'				=> $cp->vars['lang_name'],
 			'lang_explain'			=> $cp->vars['lang_explain'],
-			'lang_default_value'	=> $cp->vars['lang_default_value']
+			'lang_default_value'	=> $cp->vars['lang_default_value'],
 		);
 
 		if ($action == 'create')
@@ -1174,7 +1174,7 @@ class acp_profile
 						'lang_id'		=> $lang_id,
 						'lang_name'		=> $cp->vars['l_lang_name'][$lang_id],
 						'lang_explain'	=> (isset($cp->vars['l_lang_explain'][$lang_id])) ? $cp->vars['l_lang_explain'][$lang_id] : '',
-						'lang_default_value'	=> (isset($cp->vars['l_lang_default_value'][$lang_id])) ? $cp->vars['l_lang_default_value'][$lang_id] : ''
+						'lang_default_value'	=> (isset($cp->vars['l_lang_default_value'][$lang_id])) ? $cp->vars['l_lang_default_value'][$lang_id] : '',
 					);
 				}
 			}
@@ -1225,7 +1225,7 @@ class acp_profile
 			{
 				$sql_ary = array(
 					'field_type'	=> (int) $field_type,
-					'lang_value'	=> $value
+					'lang_value'	=> $value,
 				);
 
 				if ($action == 'create')
@@ -1280,7 +1280,7 @@ class acp_profile
 							'lang_id'		=> (int) $lang_id,
 							'option_id'		=> (int) $option_id,
 							'field_type'	=> (int) $field_type,
-							'lang_value'	=> $value
+							'lang_value'	=> $value,
 						);
 					}
 				}

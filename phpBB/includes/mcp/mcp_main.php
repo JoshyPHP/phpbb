@@ -556,7 +556,7 @@ function mcp_move_topic($topic_ids)
 					'poll_start'			=>	(int) $row['poll_start'],
 					'poll_length'			=>	(int) $row['poll_length'],
 					'poll_max_options'		=>	(int) $row['poll_max_options'],
-					'poll_last_vote'		=>	(int) $row['poll_last_vote']
+					'poll_last_vote'		=>	(int) $row['poll_last_vote'],
 				);
 
 				$db->sql_query('INSERT INTO ' . TOPICS_TABLE . $db->sql_build_array('INSERT', $shadow));
@@ -1234,7 +1234,7 @@ function mcp_fork_topic($topic_ids)
 						'poll_option_id'	=> (int) $row['poll_option_id'],
 						'topic_id'			=> (int) $new_topic_id,
 						'poll_option_text'	=> (string) $row['poll_option_text'],
-						'poll_option_total'	=> 0
+						'poll_option_total'	=> 0,
 					);
 
 					$db->sql_query('INSERT INTO ' . POLL_OPTIONS_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary));
@@ -1340,7 +1340,7 @@ function mcp_fork_topic($topic_ids)
 							'mimetype'			=> (string) $attach_row['mimetype'],
 							'filesize'			=> (int) $attach_row['filesize'],
 							'filetime'			=> (int) $attach_row['filetime'],
-							'thumbnail'			=> (int) $attach_row['thumbnail']
+							'thumbnail'			=> (int) $attach_row['thumbnail'],
 						);
 					}
 					$db->sql_freeresult($result);

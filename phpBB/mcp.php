@@ -107,7 +107,7 @@ if (!$auth->acl_getf_global('m_'))
 		'make_sticky'	=> 'f_sticky',
 		'make_announce'	=> 'f_announce',
 		'make_global'	=> 'f_announce',
-		'make_normal'	=> array('f_announce', 'f_sticky')
+		'make_normal'	=> array('f_announce', 'f_sticky'),
 	);
 
 	$allow_user = false;
@@ -373,11 +373,11 @@ function get_topic_data($topic_ids, $acl_list = false, $read_tracking = false)
 			'LEFT_JOIN'	=> array(
 				array(
 					'FROM'	=> array(FORUMS_TABLE => 'f'),
-					'ON'	=> 'f.forum_id = t.forum_id'
-				)
+					'ON'	=> 'f.forum_id = t.forum_id',
+				),
 			),
 
-			'WHERE'		=> $db->sql_in_set('t.topic_id', $topic_ids)
+			'WHERE'		=> $db->sql_in_set('t.topic_id', $topic_ids),
 		);
 
 		if ($read_tracking && $config['load_db_lastread'])
@@ -386,12 +386,12 @@ function get_topic_data($topic_ids, $acl_list = false, $read_tracking = false)
 
 			$sql_array['LEFT_JOIN'][] = array(
 				'FROM'	=> array(TOPICS_TRACK_TABLE => 'tt'),
-				'ON'	=> 'tt.user_id = ' . $user->data['user_id'] . ' AND t.topic_id = tt.topic_id'
+				'ON'	=> 'tt.user_id = ' . $user->data['user_id'] . ' AND t.topic_id = tt.topic_id',
 			);
 
 			$sql_array['LEFT_JOIN'][] = array(
 				'FROM'	=> array(FORUMS_TRACK_TABLE => 'ft'),
-				'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND t.forum_id = ft.forum_id'
+				'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND t.forum_id = ft.forum_id',
 			);
 		}
 
@@ -449,8 +449,8 @@ function get_post_data($post_ids, $acl_list = false, $read_tracking = false)
 		'LEFT_JOIN'	=> array(
 			array(
 				'FROM'	=> array(FORUMS_TABLE => 'f'),
-				'ON'	=> 'f.forum_id = t.forum_id'
-			)
+				'ON'	=> 'f.forum_id = t.forum_id',
+			),
 		),
 
 		'WHERE'		=> $db->sql_in_set('p.post_id', $post_ids) . '
@@ -464,12 +464,12 @@ function get_post_data($post_ids, $acl_list = false, $read_tracking = false)
 
 		$sql_array['LEFT_JOIN'][] = array(
 			'FROM'	=> array(TOPICS_TRACK_TABLE => 'tt'),
-			'ON'	=> 'tt.user_id = ' . $user->data['user_id'] . ' AND t.topic_id = tt.topic_id'
+			'ON'	=> 'tt.user_id = ' . $user->data['user_id'] . ' AND t.topic_id = tt.topic_id',
 		);
 
 		$sql_array['LEFT_JOIN'][] = array(
 			'FROM'	=> array(FORUMS_TRACK_TABLE => 'ft'),
-			'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND t.forum_id = ft.forum_id'
+			'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND t.forum_id = ft.forum_id',
 		);
 	}
 

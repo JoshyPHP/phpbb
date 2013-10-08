@@ -2946,7 +2946,7 @@ function meta_refresh($time, $url, $disable_cd_check = false)
 	{
 		$refresh_data = array(
 			'time'	=> $time,
-			'url'		=> str_replace('&amp;', '&', $url)
+			'url'		=> str_replace('&amp;', '&', $url),
 		);
 	}
 	else
@@ -3229,7 +3229,7 @@ function confirm_box($check, $title = '', $hidden = '', $html_body = 'confirm_bo
 
 			'YES_VALUE'			=> $user->lang['YES'],
 			'S_CONFIRM_ACTION'	=> str_replace('&amp;', '&', $u_action), //inefficient, rewrite whole function
-			'S_HIDDEN_FIELDS'	=> $hidden . $s_hidden_fields
+			'S_HIDDEN_FIELDS'	=> $hidden . $s_hidden_fields,
 		));
 	}
 
@@ -4469,7 +4469,7 @@ function msg_handler($errno, $msg_text, $errfile, $errline)
 					'MESSAGE_TEXT'		=> $msg_text,
 					'S_USER_WARNING'	=> ($errno == E_USER_WARNING) ? true : false,
 					'S_USER_NOTICE'		=> ($errno == E_USER_NOTICE) ? true : false,
-					'REFRESH_DATA'		=> (!empty($refresh_data)) ? $refresh_data : null
+					'REFRESH_DATA'		=> (!empty($refresh_data)) ? $refresh_data : null,
 				));
 			}
 

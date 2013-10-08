@@ -93,7 +93,7 @@ $global_privmsgs_rules = array(
 	CHECK_TO		=> array(
 		RULE_TO_GROUP		=> array('check0' => 'to', 'check1' => 'bcc', 'check2' => 'user_in_group'),
 		RULE_TO_ME			=> array('check0' => 'to', 'check1' => 'bcc'),
-	)
+	),
 );
 
 /**
@@ -107,7 +107,7 @@ $global_rule_conditions = array(
 	RULE_BEGINS_WITH	=> 'text',
 	RULE_ENDS_WITH		=> 'text',
 	RULE_IS_USER		=> 'user',
-	RULE_IS_GROUP		=> 'group'
+	RULE_IS_GROUP		=> 'group',
 );
 
 /**
@@ -158,7 +158,7 @@ function get_folder($user_id, $folder_id = false)
 	$folder[PRIVMSGS_INBOX] = array(
 		'folder_name'		=> $user->lang['PM_INBOX'],
 		'num_messages'		=> $num_messages[PRIVMSGS_INBOX],
-		'unread_messages'	=> $num_unread[PRIVMSGS_INBOX]
+		'unread_messages'	=> $num_unread[PRIVMSGS_INBOX],
 	);
 
 	// Custom Folder
@@ -172,7 +172,7 @@ function get_folder($user_id, $folder_id = false)
 		$folder[$row['folder_id']] = array(
 			'folder_name'		=> $row['folder_name'],
 			'num_messages'		=> $row['pm_count'],
-			'unread_messages'	=> ((isset($num_unread[$row['folder_id']])) ? $num_unread[$row['folder_id']] : 0)
+			'unread_messages'	=> ((isset($num_unread[$row['folder_id']])) ? $num_unread[$row['folder_id']] : 0),
 		);
 	}
 	$db->sql_freeresult($result);
@@ -180,13 +180,13 @@ function get_folder($user_id, $folder_id = false)
 	$folder[PRIVMSGS_OUTBOX] = array(
 		'folder_name'		=> $user->lang['PM_OUTBOX'],
 		'num_messages'		=> $num_messages[PRIVMSGS_OUTBOX],
-		'unread_messages'	=> $num_unread[PRIVMSGS_OUTBOX]
+		'unread_messages'	=> $num_unread[PRIVMSGS_OUTBOX],
 	);
 
 	$folder[PRIVMSGS_SENTBOX] = array(
 		'folder_name'		=> $user->lang['PM_SENTBOX'],
 		'num_messages'		=> $num_messages[PRIVMSGS_SENTBOX],
-		'unread_messages'	=> $num_unread[PRIVMSGS_SENTBOX]
+		'unread_messages'	=> $num_unread[PRIVMSGS_SENTBOX],
 	);
 
 	// Define Folder Array for template designers (and for making custom folders usable by the template too)
@@ -965,7 +965,7 @@ function handle_mark_actions($user_id, $mark_action)
 					'cur_folder_id'	=> $cur_folder_id,
 					'mark_option'	=> 'delete_marked',
 					'submit_mark'	=> true,
-					'marked_msg_id'	=> $msg_ids
+					'marked_msg_id'	=> $msg_ids,
 				);
 
 				confirm_box(false, 'DELETE_MARKED_PM', build_hidden_fields($s_hidden_fields));
@@ -1707,7 +1707,7 @@ function submit_pm($mode, $subject, &$data, $put_in_outbox = true)
 				'message_text'		=> $data['message'],
 				'message_attachment'=> (!empty($data['attachment_data'])) ? 1 : 0,
 				'bbcode_bitfield'	=> $data['bbcode_bitfield'],
-				'bbcode_uid'		=> $data['bbcode_uid']
+				'bbcode_uid'		=> $data['bbcode_uid'],
 			);
 		break;
 	}
@@ -1748,7 +1748,7 @@ function submit_pm($mode, $subject, &$data, $put_in_outbox = true)
 				'folder_id'		=> PRIVMSGS_NO_BOX,
 				'pm_new'		=> 1,
 				'pm_unread'		=> 1,
-				'pm_forwarded'	=> ($mode == 'forward') ? 1 : 0
+				'pm_forwarded'	=> ($mode == 'forward') ? 1 : 0,
 			);
 		}
 

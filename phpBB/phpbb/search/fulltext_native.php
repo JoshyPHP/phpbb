@@ -622,7 +622,7 @@ class fulltext_native extends \phpbb\search\base
 					{
 						$sql_array['LEFT_JOIN'][] = array(
 							'FROM'	=> array(SEARCH_WORDLIST_TABLE => 'w' . $w_num),
-							'ON'	=> "w$w_num.word_text LIKE $id"
+							'ON'	=> "w$w_num.word_text LIKE $id",
 						);
 						$word_ids[] = "w$w_num.word_id";
 
@@ -674,7 +674,7 @@ class fulltext_native extends \phpbb\search\base
 			{
 				$sql_array['LEFT_JOIN'][] = array(
 					'FROM'	=> array(SEARCH_WORDLIST_TABLE => 'w' . $w_num),
-					'ON'	=> "w$w_num.word_text LIKE $subquery"
+					'ON'	=> "w$w_num.word_text LIKE $subquery",
 				);
 
 				$this->must_not_contain_ids[$key] = "w$w_num.word_id";
@@ -688,7 +688,7 @@ class fulltext_native extends \phpbb\search\base
 		{
 			$sql_array['LEFT_JOIN'][] = array(
 				'FROM'	=> array(SEARCH_WORDMATCH_TABLE => 'm' . $m_num),
-				'ON'	=> $this->db->sql_in_set("m$m_num.word_id", $this->must_not_contain_ids) . (($title_match) ? " AND m$m_num.$title_match" : '') . " AND m$m_num.post_id = m0.post_id"
+				'ON'	=> $this->db->sql_in_set("m$m_num.word_id", $this->must_not_contain_ids) . (($title_match) ? " AND m$m_num.$title_match" : '') . " AND m$m_num.post_id = m0.post_id",
 			);
 
 			$sql_where[] = "m$m_num.word_id IS NULL";
@@ -704,7 +704,7 @@ class fulltext_native extends \phpbb\search\base
 				{
 					$sql_array['LEFT_JOIN'][] = array(
 						'FROM'	=> array(SEARCH_WORDLIST_TABLE => 'w' . $w_num),
-						'ON'	=> "w$w_num.word_text LIKE $id"
+						'ON'	=> "w$w_num.word_text LIKE $id",
 					);
 					$id = "w$w_num.word_id";
 
@@ -714,7 +714,7 @@ class fulltext_native extends \phpbb\search\base
 
 				$sql_array['LEFT_JOIN'][] = array(
 					'FROM'	=> array(SEARCH_WORDMATCH_TABLE => 'm' . $m_num),
-					'ON'	=> "m$m_num.word_id = $id AND m$m_num.post_id = m0.post_id" . (($title_match) ? " AND m$m_num.$title_match" : '')
+					'ON'	=> "m$m_num.word_id = $id AND m$m_num.post_id = m0.post_id" . (($title_match) ? " AND m$m_num.$title_match" : ''),
 				);
 				$is_null_joins[] = "m$m_num.word_id IS NULL";
 
@@ -767,7 +767,7 @@ class fulltext_native extends \phpbb\search\base
 			{
 				$sql_array_count['LEFT_JOIN'][] = array(
 					'FROM'	=> array(TOPICS_TABLE => 't'),
-					'ON'	=> 'p.topic_id = t.topic_id'
+					'ON'	=> 'p.topic_id = t.topic_id',
 				);
 			}
 
@@ -831,7 +831,7 @@ class fulltext_native extends \phpbb\search\base
 		{
 			$sql_array['LEFT_JOIN'][] = array(
 				'FROM'	=> array(TOPICS_TABLE => 't'),
-				'ON'	=> 'p.topic_id = t.topic_id'
+				'ON'	=> 'p.topic_id = t.topic_id',
 			);
 		}
 
@@ -1576,7 +1576,7 @@ class fulltext_native extends \phpbb\search\base
 			"\xC0"	=>	2,
 			"\xD0"	=>	2,
 			"\xE0"	=>	3,
-			"\xF0"	=>	4
+			"\xF0"	=>	4,
 		);
 
 		/**
@@ -1817,7 +1817,7 @@ class fulltext_native extends \phpbb\search\base
 		// These are fields required in the config table
 		return array(
 			'tpl'		=> $tpl,
-			'config'	=> array('fulltext_native_load_upd' => 'bool', 'fulltext_native_min_chars' => 'integer:0:255', 'fulltext_native_max_chars' => 'integer:0:255', 'fulltext_native_common_thres' => 'double:0:100')
+			'config'	=> array('fulltext_native_load_upd' => 'bool', 'fulltext_native_min_chars' => 'integer:0:255', 'fulltext_native_max_chars' => 'integer:0:255', 'fulltext_native_common_thres' => 'double:0:100'),
 		);
 	}
 }

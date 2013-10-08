@@ -1381,13 +1381,13 @@ class session
 		$sql_ary = array(
 			'key_id'		=> (string) md5($key_id),
 			'last_ip'		=> (string) $this->ip,
-			'last_login'	=> (int) time()
+			'last_login'	=> (int) time(),
 		);
 
 		if (!$key)
 		{
 			$sql_ary += array(
-				'user_id'	=> (int) $user_id
+				'user_id'	=> (int) $user_id,
 			);
 		}
 

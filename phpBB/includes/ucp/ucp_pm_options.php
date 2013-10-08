@@ -200,7 +200,7 @@ function message_options($id, $mode, $global_privmsgs_rules, $global_rule_condit
 			'remove_folder_id'	=> $remove_folder_id,
 			'remove_action'		=> $remove_action,
 			'move_to'			=> $move_to,
-			'remove_folder'		=> 1
+			'remove_folder'		=> 1,
 		);
 
 		// Do we need to confirm?
@@ -312,7 +312,7 @@ function message_options($id, $mode, $global_privmsgs_rules, $global_rule_condit
 				'rule_user_id'		=> $rule_user_id,
 				'rule_group_id'		=> $rule_group_id,
 				'rule_action'		=> $action,
-				'rule_folder_id'	=> $folder_id
+				'rule_folder_id'	=> $folder_id,
 			);
 
 			$sql = 'SELECT rule_id

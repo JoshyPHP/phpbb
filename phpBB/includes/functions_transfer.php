@@ -297,7 +297,7 @@ class ftp extends transfer
 			'password'	=> '',
 			'root_path'	=> $user->page['root_script_path'],
 			'port'		=> 21,
-			'timeout'	=> 10
+			'timeout'	=> 10,
 		);
 	}
 
@@ -551,7 +551,7 @@ class ftp_fsock extends transfer
 			'password'	=> '',
 			'root_path'	=> $user->page['root_script_path'],
 			'port'		=> 21,
-			'timeout'	=> 10
+			'timeout'	=> 10,
 		);
 	}
 

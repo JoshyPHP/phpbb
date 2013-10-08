@@ -489,7 +489,7 @@ class firebird extends \phpbb\db\driver\driver
 		}
 		return array(
 			'message'	=> $msg,
-			'code'		=> (@function_exists('ibase_errcode') ? @ibase_errcode() : '')
+			'code'		=> (@function_exists('ibase_errcode') ? @ibase_errcode() : ''),
 		);
 	}
 

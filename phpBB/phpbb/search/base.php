@@ -201,7 +201,7 @@ class base
 						'search_key'		=> $search_key,
 						'search_time'		=> time(),
 						'search_keywords'	=> $keywords,
-						'search_authors'	=> ' ' . implode(' ', $author_ary) . ' '
+						'search_authors'	=> ' ' . implode(' ', $author_ary) . ' ',
 					);
 
 					$sql = 'INSERT INTO ' . SEARCH_RESULTS_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);

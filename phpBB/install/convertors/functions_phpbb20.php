@@ -980,7 +980,7 @@ function phpbb_convert_authentication($mode)
 
 		$mod_post_map = array(
 			'auth_announce'		=> 'f_announce',
-			'auth_sticky'		=> 'f_sticky'
+			'auth_sticky'		=> 'f_sticky',
 		);
 
 		foreach ($user_access as $forum_id => $access_map)

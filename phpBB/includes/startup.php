@@ -39,7 +39,7 @@ function deregister_globals()
 		'_ENV'		=> true,
 		'_FILES'	=> true,
 		'phpEx'		=> true,
-		'phpbb_root_path'	=> true
+		'phpbb_root_path'	=> true,
 	);
 
 	// Not only will array_merge and array_keys give a warning if

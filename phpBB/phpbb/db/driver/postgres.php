@@ -417,7 +417,7 @@ class postgres extends \phpbb\db\driver\driver
 
 		return array(
 			'message'	=> $message,
-			'code'		=> ''
+			'code'		=> '',
 		);
 	}
 

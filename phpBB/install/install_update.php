@@ -40,7 +40,7 @@ if (!empty($setmodules))
 		'module_order'		=> 30,
 		'module_subs'		=> '',
 		'module_stages'		=> array('INTRO', 'VERSION_CHECK', 'FILE_CHECK', 'UPDATE_FILES', 'UPDATE_DB'),
-		'module_reqs'		=> ''
+		'module_reqs'		=> '',
 	);
 }
 

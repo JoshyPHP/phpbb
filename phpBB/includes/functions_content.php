@@ -582,7 +582,7 @@ function generate_text_for_edit($text, $uid, $flags)
 		'allow_bbcode'	=> ($flags & OPTION_FLAG_BBCODE) ? 1 : 0,
 		'allow_smilies'	=> ($flags & OPTION_FLAG_SMILIES) ? 1 : 0,
 		'allow_urls'	=> ($flags & OPTION_FLAG_LINKS) ? 1 : 0,
-		'text'			=> $text
+		'text'			=> $text,
 	);
 }
 
@@ -988,7 +988,7 @@ function parse_attachments($forum_id, &$message, &$attachments, &$update_count, 
 
 			$block_array += array(
 				'S_DENIED'			=> true,
-				'DENIED_MESSAGE'	=> sprintf($user->lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension'])
+				'DENIED_MESSAGE'	=> sprintf($user->lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']),
 			);
 		}
 

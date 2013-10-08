@@ -756,7 +756,7 @@ if ($submit || $preview || $refresh)
 				'poll_length'		=> 0,
 				'poll_last_vote'	=> 0,
 				'poll_max_options'	=> 0,
-				'poll_vote_change'	=> 0
+				'poll_vote_change'	=> 0,
 			);
 
 			$sql = 'UPDATE ' . TOPICS_TABLE . '
@@ -965,7 +965,7 @@ if ($submit || $preview || $refresh)
 			'enable_bbcode'		=> $post_data['enable_bbcode'],
 			'enable_urls'		=> $post_data['enable_urls'],
 			'enable_smilies'	=> $post_data['enable_smilies'],
-			'img_status'		=> $img_status
+			'img_status'		=> $img_status,
 		);
 
 		$message_parser->parse_poll($poll);

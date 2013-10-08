@@ -189,7 +189,7 @@ if ($mark_read == 'topics')
 			'UNREAD_POSTS'		=> $user->lang['UNREAD_POSTS'],
 			'U_MARK_TOPICS'		=> ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}viewforum.$phpEx", 'hash=' . generate_link_hash('global') . "&f=$forum_id&mark=topics&mark_time=" . time()) : '',
 			'MESSAGE_TITLE'		=> $user->lang['INFORMATION'],
-			'MESSAGE_TEXT'		=> $user->lang['TOPICS_MARKED']
+			'MESSAGE_TEXT'		=> $user->lang['TOPICS_MARKED'],
 		);
 		$json_response = new \phpbb\json_response();
 		$json_response->send($data);
@@ -367,7 +367,7 @@ $rowset = $announcement_list = $topic_list = $global_announce_forums = array();
 $sql_array = array(
 	'SELECT'	=> 't.*',
 	'FROM'		=> array(
-		TOPICS_TABLE		=> 't'
+		TOPICS_TABLE		=> 't',
 	),
 	'LEFT_JOIN'	=> array(),
 );

@@ -99,7 +99,7 @@ class acp_words
 
 				$sql_ary = array(
 					'word'			=> $word,
-					'replacement'	=> $replacement
+					'replacement'	=> $replacement,
 				);
 				
 				if ($word_id)

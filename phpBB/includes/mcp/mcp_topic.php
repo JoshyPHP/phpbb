@@ -497,7 +497,7 @@ function split_topic($action, $topic_id, $to_forum_id, $subject)
 			'forum_id'			=> $to_forum_id,
 			'topic_title'		=> $subject,
 			'icon_id'			=> $icon_id,
-			'topic_visibility'	=> 1
+			'topic_visibility'	=> 1,
 		);
 
 		$sql = 'INSERT INTO ' . TOPICS_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);

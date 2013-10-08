@@ -241,7 +241,7 @@ else
 
 // Set some standard variables we want to force
 $config = new \phpbb\config\config(array(
-	'load_tplcompile'	=> '1'
+	'load_tplcompile'	=> '1',
 ));
 
 $symfony_request = $phpbb_container->get('symfony_request');

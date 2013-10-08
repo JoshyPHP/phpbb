@@ -71,7 +71,7 @@ $tables = array(
 	'vote_desc',
 	'vote_results',
 	'vote_voters',
-	'words'
+	'words',
 );
 
 /**
@@ -145,7 +145,7 @@ $config_schema = array(
 		'record_online_users'	=> 'record_online_users',
 		'record_online_date'	=> 'record_online_date',
 		'board_startdate'		=> 'board_startdate',
-	)
+	),
 );
 
 /**
@@ -192,7 +192,7 @@ if (!$get_info)
 			'attachments',
 			'attachments_desc',
 			'extensions',
-			'extension_groups'
+			'extension_groups',
 		);
 
 		$src_db->sql_freeresult($result);
@@ -384,7 +384,7 @@ if (!$get_info)
 				array('thumbnail',				'attachments_desc.thumbnail',			''),
 
 				'where'			=> 'attachments_desc.attach_id = attachments.attach_id AND attachments.privmsgs_id = 0 AND posts.post_id = attachments.post_id',
-				'group_by'		=> 'attachments.attach_id'
+				'group_by'		=> 'attachments.attach_id',
 			),
 
 			array(
@@ -409,7 +409,7 @@ if (!$get_info)
 				array('thumbnail',				'attachments_desc.thumbnail',			''),
 
 				'where'			=> 'attachments_desc.attach_id = attachments.attach_id AND attachments.post_id = 0',
-				'group_by'		=> 'attachments.attach_id'
+				'group_by'		=> 'attachments.attach_id',
 			),
 
 			array(
@@ -659,7 +659,7 @@ if (!$get_info)
 				array('',						'posts_text.post_text AS message',	''),
 				array('',						'posts_text.post_subject AS title',	''),*/
 
-				'where'			=>	'posts.post_id = posts_text.post_id'
+				'where'			=>	'posts.post_id = posts_text.post_id',
 			),
 
 			array(
@@ -702,7 +702,7 @@ if (!$get_info)
 				array('to_address',				'privmsgs.privmsgs_to_userid',			'phpbb_privmsgs_to_userid'),
 				array('bcc_address',			'',										''),
 
-				'where'			=>	'privmsgs.privmsgs_id = privmsgs_text.privmsgs_text_id'
+				'where'			=>	'privmsgs.privmsgs_id = privmsgs_text.privmsgs_text_id',
 			),
 
 			array(
@@ -865,7 +865,7 @@ if (!$get_info)
 				'autoincrement'	=> 'user_id',
 				'query_first'	=> array(
 					array('target', 'DELETE FROM ' . USERS_TABLE . ' WHERE user_id <> ' . ANONYMOUS),
-					array('target', $convert->truncate_statement . BOTS_TABLE)
+					array('target', $convert->truncate_statement . BOTS_TABLE),
 				),
 
 				'execute_last'	=> '

@@ -273,14 +273,14 @@ class ucp_main
 
 						'FROM'		=> array(
 							FORUMS_WATCH_TABLE	=> 'fw',
-							FORUMS_TABLE		=> 'f'
+							FORUMS_TABLE		=> 'f',
 						),
 
 						'WHERE'		=> 'fw.user_id = ' . $user->data['user_id'] . '
 							AND f.forum_id = fw.forum_id
 							AND ' . $db->sql_in_set('f.forum_id', $forbidden_forums, true, true),
 
-						'ORDER_BY'	=> 'left_id'
+						'ORDER_BY'	=> 'left_id',
 					);
 
 					if ($config['load_db_lastread'])
@@ -288,8 +288,8 @@ class ucp_main
 						$sql_array['LEFT_JOIN'] = array(
 							array(
 								'FROM'	=> array(FORUMS_TRACK_TABLE => 'ft'),
-								'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND ft.forum_id = f.forum_id'
-							)
+								'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND ft.forum_id = f.forum_id',
+							),
 						);
 
 						$sql_array['SELECT'] .= ', ft.mark_time ';
@@ -486,7 +486,7 @@ class ucp_main
 						{
 							$draft_row = array(
 								'draft_subject' => $draft_subject,
-								'draft_message' => $draft_message
+								'draft_message' => $draft_message,
 							);
 
 							$sql = 'UPDATE ' . DRAFTS_TABLE . '
@@ -605,7 +605,7 @@ class ucp_main
 						'S_LINK_TOPIC'		=> $link_topic,
 						'S_LINK_FORUM'		=> $link_forum,
 						'S_LINK_PM'			=> $link_pm,
-						'S_HIDDEN_FIELDS'	=> $s_hidden_fields
+						'S_HIDDEN_FIELDS'	=> $s_hidden_fields,
 					);
 					$row_count++;
 
@@ -655,7 +655,7 @@ class ucp_main
 
 			'FROM'		=> array(
 				$table			=> 'i',
-				TOPICS_TABLE	=> 't'
+				TOPICS_TABLE	=> 't',
 			),
 
 			'WHERE'		=>	'i.topic_id = t.topic_id
@@ -684,7 +684,7 @@ class ucp_main
 
 				'FROM'		=> array(
 					TOPICS_WATCH_TABLE	=> 'tw',
-					TOPICS_TABLE		=> 't'
+					TOPICS_TABLE		=> 't',
 				),
 
 				'WHERE'		=> 'tw.user_id = ' . $user->data['user_id'] . '
@@ -692,7 +692,7 @@ class ucp_main
 					AND ' . $db->sql_in_set('t.forum_id', $forbidden_forum_ary, true, true),
 
 
-				'ORDER_BY'	=> 't.topic_last_post_time DESC'
+				'ORDER_BY'	=> 't.topic_last_post_time DESC',
 			);
 
 			$sql_array['LEFT_JOIN'] = array();
@@ -709,7 +709,7 @@ class ucp_main
 				'WHERE'		=> 'b.user_id = ' . $user->data['user_id'] . '
 					AND ' . $db->sql_in_set('f.forum_id', $forbidden_forum_ary, true, true),
 
-				'ORDER_BY'	=> 't.topic_last_post_time DESC'
+				'ORDER_BY'	=> 't.topic_last_post_time DESC',
 			);
 
 			$sql_array['LEFT_JOIN'] = array();

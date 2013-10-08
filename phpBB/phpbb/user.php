@@ -239,7 +239,7 @@ class user extends \phpbb\session
 		$parsed_items = $cache->obtain_cfg_items($this->style);
 
 		$check_for = array(
-			'pagination_sep'    => (string) ', '
+			'pagination_sep'    => (string) ', ',
 		);
 
 		foreach ($check_for as $key => $default_value)

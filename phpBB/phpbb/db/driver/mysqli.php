@@ -313,7 +313,7 @@ class mysqli extends \phpbb\db\driver\mysql_base
 		{
 			$error = array(
 				'message'	=> @mysqli_error($this->db_connect_id),
-				'code'		=> @mysqli_errno($this->db_connect_id)
+				'code'		=> @mysqli_errno($this->db_connect_id),
 			);
 		}
 		else if (function_exists('mysqli_connect_error'))

@@ -790,8 +790,8 @@ class acp_icons
 							'MESSAGE_TITLE'	=> $user->lang['INFORMATION'],
 							'MESSAGE_TEXT'	=> $notice,
 							'REFRESH_DATA'	=> array(
-								'time'	=> 3
-							)
+								'time'	=> 3,
+							),
 						));
 					}
 				}

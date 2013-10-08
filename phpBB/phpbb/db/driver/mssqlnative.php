@@ -223,7 +223,7 @@ class mssqlnative extends \phpbb\db\driver\mssql_base
 		$this->db_connect_id = sqlsrv_connect($this->server, array(
 			'Database' => $this->dbname,
 			'UID' => $this->user,
-			'PWD' => $sqlpassword
+			'PWD' => $sqlpassword,
 		));
 
 		return ($this->db_connect_id) ? $this->db_connect_id : $this->sql_error('');

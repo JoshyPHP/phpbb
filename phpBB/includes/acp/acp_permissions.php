@@ -1013,7 +1013,7 @@ class acp_permissions
 		{
 			$groups[$row['group_id']] = array(
 				'auth_setting'		=> ACL_NO,
-				'group_name'		=> ($row['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $row['group_name']] : $row['group_name']
+				'group_name'		=> ($row['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $row['group_name']] : $row['group_name'],
 			);
 		}
 		$db->sql_freeresult($result);
@@ -1305,7 +1305,7 @@ class acp_permissions
 			'group_ids'			=> $defined_group_ids,
 			'group_ids_options'	=> $s_defined_group_options,
 			'user_ids'			=> $defined_user_ids,
-			'user_ids_options'	=> $s_defined_user_options
+			'user_ids_options'	=> $s_defined_user_options,
 		);
 	}
 }

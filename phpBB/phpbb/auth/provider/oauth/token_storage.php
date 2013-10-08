@@ -194,7 +194,7 @@ class token_storage implements TokenStorageInterface
 
 		$sql = 'UPDATE ' . $this->auth_provider_oauth_table . '
 			SET ' . $this->db->sql_build_array('UPDATE', array(
-					'user_id' => (int) $user_id
+					'user_id' => (int) $user_id,
 				)) . '
 				WHERE user_id = ' . (int) $this->user->data['user_id'] . "
 					AND session_id = '" . $this->db->sql_escape($this->user->data['session_id']) . "'";

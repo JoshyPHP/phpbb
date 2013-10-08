@@ -1748,7 +1748,7 @@ function add_default_groups()
 			'group_type'			=> GROUP_SPECIAL,
 			'group_colour'			=> (string) $data[0],
 			'group_legend'			=> (int) $data[1],
-			'group_founder_manage'	=> (int) $data[2]
+			'group_founder_manage'	=> (int) $data[2],
 		);
 	}
 
@@ -2185,13 +2185,13 @@ function convert_bbcode($message, $convert_size = true, $extended_bbcodes = fals
 		$origx = array(
 			'#\[glow[^\]]+\](.*?)\[/glow\]#is',
 			'#\[shadow[^\]]+\](.*?)\[/shadow\]#is',
-			'#\[flash[^\]]+\](.*?)\[/flash\]#is'
+			'#\[flash[^\]]+\](.*?)\[/flash\]#is',
 		);
 
 		$replx = array(
 			'\1',
 			'\1',
-			'[url=\1]Flash[/url]'
+			'[url=\1]Flash[/url]',
 		);
 
 		$str_from = array(
@@ -2209,7 +2209,7 @@ function convert_bbcode($message, $convert_size = true, $extended_bbcodes = fals
 			'[sup]',	'[/sup]',
 			'[tt]',		'[/tt]',
 			'[move]',	'[/move]',
-			'[hr]'
+			'[hr]',
 		);
 
 		$str_to = array(
@@ -2227,7 +2227,7 @@ function convert_bbcode($message, $convert_size = true, $extended_bbcodes = fals
 			'',			'',
 			'',			'',
 			'',			'',
-			"\n\n"
+			"\n\n",
 		);
 
 		for ($i = 0; $i < sizeof($str_from); ++$i)

@@ -186,7 +186,7 @@ class acp_bbcodes
 						'first_pass_match'			=> $data['first_pass_match'],
 						'first_pass_replace'		=> $data['first_pass_replace'],
 						'second_pass_match'			=> $data['second_pass_match'],
-						'second_pass_replace'		=> $data['second_pass_replace']
+						'second_pass_replace'		=> $data['second_pass_replace'],
 					);
 
 					if ($action == 'create')
@@ -280,8 +280,8 @@ class acp_bbcodes
 								'MESSAGE_TITLE'	=> $user->lang['INFORMATION'],
 								'MESSAGE_TEXT'	=> $user->lang['BBCODE_DELETED'],
 								'REFRESH_DATA'	=> array(
-									'time'	=> 3
-								)
+									'time'	=> 3,
+								),
 							));
 						}
 					}
@@ -342,35 +342,35 @@ class acp_bbcodes
 		// @todo Make sure to change this too if something changed in message parsing
 		$tokens = array(
 			'URL'	 => array(
-				'!(?:(' . str_replace(array('!', '\#'), array('\!', '#'), get_preg_expression('url')) . ')|(' . str_replace(array('!', '\#'), array('\!', '#'), get_preg_expression('www_url')) . '))!ie'	=>	"\$this->bbcode_specialchars(('\$1') ? '\$1' : 'http://\$2')"
+				'!(?:(' . str_replace(array('!', '\#'), array('\!', '#'), get_preg_expression('url')) . ')|(' . str_replace(array('!', '\#'), array('\!', '#'), get_preg_expression('www_url')) . '))!ie'	=>	"\$this->bbcode_specialchars(('\$1') ? '\$1' : 'http://\$2')",
 			),
 			'LOCAL_URL'	 => array(
-				'!(' . str_replace(array('!', '\#'), array('\!', '#'), get_preg_expression('relative_url')) . ')!e'	=>	"\$this->bbcode_specialchars('$1')"
+				'!(' . str_replace(array('!', '\#'), array('\!', '#'), get_preg_expression('relative_url')) . ')!e'	=>	"\$this->bbcode_specialchars('$1')",
 			),
 			'RELATIVE_URL'	=> array(
-				'!(' . str_replace(array('!', '\#'), array('\!', '#'), get_preg_expression('relative_url')) . ')!e'	=>	"\$this->bbcode_specialchars('$1')"
+				'!(' . str_replace(array('!', '\#'), array('\!', '#'), get_preg_expression('relative_url')) . ')!e'	=>	"\$this->bbcode_specialchars('$1')",
 			),
 			'EMAIL' => array(
-				'!(' . get_preg_expression('email') . ')!ie'	=>	"\$this->bbcode_specialchars('$1')"
+				'!(' . get_preg_expression('email') . ')!ie'	=>	"\$this->bbcode_specialchars('$1')",
 			),
 			'TEXT' => array(
-				'!(.*?)!es'	 =>	"str_replace(array(\"\\r\\n\", '\\\"', '\\'', '(', ')'), array(\"\\n\", '\"', '&#39;', '&#40;', '&#41;'), trim('\$1'))"
+				'!(.*?)!es'	 =>	"str_replace(array(\"\\r\\n\", '\\\"', '\\'', '(', ')'), array(\"\\n\", '\"', '&#39;', '&#40;', '&#41;'), trim('\$1'))",
 			),
 			'SIMPLETEXT' => array(
-				'!([a-zA-Z0-9-+.,_ ]+)!'	 =>	"$1"
+				'!([a-zA-Z0-9-+.,_ ]+)!'	 =>	"$1",
 			),
 			'INTTEXT' => array(
-				($utf8_pcre_properties) ? '!([\p{L}\p{N}\-+,_. ]+)!u' : '!([a-zA-Z0-9\-+,_. ]+)!u'	 =>	"$1"
+				($utf8_pcre_properties) ? '!([\p{L}\p{N}\-+,_. ]+)!u' : '!([a-zA-Z0-9\-+,_. ]+)!u'	 =>	"$1",
 			),
 			'IDENTIFIER' => array(
-				'!([a-zA-Z0-9-_]+)!'	 =>	"$1"
+				'!([a-zA-Z0-9-_]+)!'	 =>	"$1",
 			),
 			'COLOR' => array(
-				'!([a-z]+|#[0-9abcdef]+)!i'	=>	'$1'
+				'!([a-z]+|#[0-9abcdef]+)!i'	=>	'$1',
 			),
 			'NUMBER' => array(
-				'!([0-9]+)!'	=>	'$1'
-			)
+				'!([0-9]+)!'	=>	'$1',
+			),
 		);
 
 		$sp_tokens = array(
@@ -478,7 +478,7 @@ class acp_bbcodes
 			'first_pass_match'			=> $fp_match,
 			'first_pass_replace'		=> $fp_replace,
 			'second_pass_match'			=> $sp_match,
-			'second_pass_replace'		=> $sp_replace
+			'second_pass_replace'		=> $sp_replace,
 		);
 	}
 }

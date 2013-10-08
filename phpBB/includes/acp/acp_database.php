@@ -39,7 +39,7 @@ class acp_database
 		$submit = (isset($_POST['submit'])) ? true : false;
 
 		$template->assign_vars(array(
-			'MODE'	=> $mode
+			'MODE'	=> $mode,
 		));
 
 		switch ($mode)
@@ -182,14 +182,14 @@ class acp_database
 							if (strlen($table_prefix) === 0 || stripos($table_name, $table_prefix) === 0)
 							{
 								$template->assign_block_vars('tables', array(
-									'TABLE'	=> $table_name
+									'TABLE'	=> $table_name,
 								));
 							}
 						}
 						unset($tables);
 
 						$template->assign_vars(array(
-							'U_ACTION'	=> $this->u_action . '&amp;action=download'
+							'U_ACTION'	=> $this->u_action . '&amp;action=download',
 						));
 
 						$available_methods = array('gzip' => 'zlib', 'bzip2' => 'bz2');
@@ -202,12 +202,12 @@ class acp_database
 							}
 
 							$template->assign_block_vars('methods', array(
-								'TYPE'	=> $type
+								'TYPE'	=> $type,
 							));
 						}
 
 						$template->assign_block_vars('methods', array(
-							'TYPE'	=> 'text'
+							'TYPE'	=> 'text',
 						));
 					break;
 				}
@@ -464,7 +464,7 @@ class acp_database
 						}
 
 						$template->assign_vars(array(
-							'U_ACTION'	=> $this->u_action . '&amp;action=submit'
+							'U_ACTION'	=> $this->u_action . '&amp;action=submit',
 						));
 					break;
 				}

@@ -840,7 +840,7 @@ $schema_data['phpbb_reports'] = array(
 		'reported_post_bitfield'			=> array('VCHAR:255', ''),
 		'reported_post_enable_magic_url'	=> array('BOOL', 1),
 		'reported_post_enable_smilies'		=> array('BOOL', 1),
-		'reported_post_enable_bbcode'		=> array('BOOL', 1)
+		'reported_post_enable_bbcode'		=> array('BOOL', 1),
 	),
 	'PRIMARY_KEY'	=> 'report_id',
 	'KEYS'			=> array(

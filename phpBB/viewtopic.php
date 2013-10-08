@@ -196,7 +196,7 @@ if ($user->data['is_registered'])
 
 	$sql_array['LEFT_JOIN'][] = array(
 		'FROM'	=> array(TOPICS_WATCH_TABLE => 'tw'),
-		'ON'	=> 'tw.user_id = ' . $user->data['user_id'] . ' AND t.topic_id = tw.topic_id'
+		'ON'	=> 'tw.user_id = ' . $user->data['user_id'] . ' AND t.topic_id = tw.topic_id',
 	);
 
 	if ($config['allow_bookmarks'])
@@ -204,7 +204,7 @@ if ($user->data['is_registered'])
 		$sql_array['SELECT'] .= ', bm.topic_id as bookmarked';
 		$sql_array['LEFT_JOIN'][] = array(
 			'FROM'	=> array(BOOKMARKS_TABLE => 'bm'),
-			'ON'	=> 'bm.user_id = ' . $user->data['user_id'] . ' AND t.topic_id = bm.topic_id'
+			'ON'	=> 'bm.user_id = ' . $user->data['user_id'] . ' AND t.topic_id = bm.topic_id',
 		);
 	}
 
@@ -214,12 +214,12 @@ if ($user->data['is_registered'])
 
 		$sql_array['LEFT_JOIN'][] = array(
 			'FROM'	=> array(TOPICS_TRACK_TABLE => 'tt'),
-			'ON'	=> 'tt.user_id = ' . $user->data['user_id'] . ' AND t.topic_id = tt.topic_id'
+			'ON'	=> 'tt.user_id = ' . $user->data['user_id'] . ' AND t.topic_id = tt.topic_id',
 		);
 
 		$sql_array['LEFT_JOIN'][] = array(
 			'FROM'	=> array(FORUMS_TRACK_TABLE => 'ft'),
-			'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND t.forum_id = ft.forum_id'
+			'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND t.forum_id = ft.forum_id',
 		);
 	}
 }

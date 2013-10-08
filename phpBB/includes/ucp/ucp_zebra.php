@@ -195,7 +195,7 @@ class ucp_zebra
 										$sql_ary[] = array(
 											'user_id'		=> (int) $user->data['user_id'],
 											'zebra_id'		=> (int) $zebra_id,
-											$sql_mode		=> 1
+											$sql_mode		=> 1,
 										);
 									}
 
@@ -237,8 +237,8 @@ class ucp_zebra
 							'MESSAGE_TEXT'	=> $message,
 							'REFRESH_DATA'	=> array(
 								'time'	=> 3,
-								'url'		=> $this->u_action
-							)
+								'url'		=> $this->u_action,
+							),
 						));
 					}
 					else if ($updated)

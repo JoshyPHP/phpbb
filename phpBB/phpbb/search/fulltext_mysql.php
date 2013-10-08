@@ -381,7 +381,7 @@ class fulltext_mysql extends \phpbb\search\base
 			$topic_id,
 			implode(',', $ex_fid_ary),
 			$post_visibility,
-			implode(',', $author_ary)
+			implode(',', $author_ary),
 		)));
 
 		if ($start < 0)
@@ -944,7 +944,7 @@ class fulltext_mysql extends \phpbb\search\base
 		// These are fields required in the config table
 		return array(
 			'tpl'		=> $tpl,
-			'config'	=> array()
+			'config'	=> array(),
 		);
 	}
 }

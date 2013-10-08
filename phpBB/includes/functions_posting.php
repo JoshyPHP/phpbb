@@ -332,7 +332,7 @@ function posting_gen_topic_types($forum_id, $cur_topic_type = POST_NORMAL)
 	$topic_types = array(
 		'sticky'	=> array('const' => POST_STICKY, 'lang' => 'POST_STICKY'),
 		'announce'	=> array('const' => POST_ANNOUNCE, 'lang' => 'POST_ANNOUNCEMENT'),
-		'global'	=> array('const' => POST_GLOBAL, 'lang' => 'POST_GLOBAL')
+		'global'	=> array('const' => POST_GLOBAL, 'lang' => 'POST_GLOBAL'),
 	);
 
 	$topic_type_array = array();
@@ -349,7 +349,7 @@ function posting_gen_topic_types($forum_id, $cur_topic_type = POST_NORMAL)
 			$topic_type_array[] = array(
 				'VALUE'			=> $topic_value['const'],
 				'S_CHECKED'		=> ($cur_topic_type == $topic_value['const']) ? ' checked="checked"' : '',
-				'L_TOPIC_TYPE'	=> $user->lang[$topic_value['lang']]
+				'L_TOPIC_TYPE'	=> $user->lang[$topic_value['lang']],
 			);
 		}
 	}
@@ -392,7 +392,7 @@ function upload_attachment($form_name, $forum_id, $local = false, $local_storage
 	global $phpbb_root_path, $phpEx;
 
 	$filedata = array(
-		'error'	=> array()
+		'error'	=> array(),
 	);
 
 	include_once($phpbb_root_path . 'includes/functions_upload.' . $phpEx);
@@ -545,14 +545,14 @@ function get_img_size_format($width, $height)
 	{
 		return array(
 			round($width * ($max_width / $width)),
-			round($height * ($max_width / $width))
+			round($height * ($max_width / $width)),
 		);
 	}
 	else
 	{
 		return array(
 			round($width * ($max_width / $height)),
-			round($height * ($max_width / $height))
+			round($height * ($max_width / $height)),
 		);
 	}
 }
@@ -615,7 +615,7 @@ function get_supported_image_types($type = false)
 		return array(
 			'gd'		=> ($new_type) ? true : false,
 			'format'	=> $new_type,
-			'version'	=> (function_exists('imagecreatetruecolor')) ? 2 : 1
+			'version'	=> (function_exists('imagecreatetruecolor')) ? 2 : 1,
 		);
 	}
 
@@ -1555,7 +1555,7 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 				'bbcode_bitfield'	=> $data['bbcode_bitfield'],
 				'bbcode_uid'		=> $data['bbcode_uid'],
 				'post_postcount'	=> ($auth->acl_get('f_postcount', $data['forum_id'])) ? 1 : 0,
-				'post_edit_locked'	=> $data['post_edit_locked']
+				'post_edit_locked'	=> $data['post_edit_locked'],
 			);
 		break;
 
@@ -1880,7 +1880,7 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 					$sql_insert_ary[] = array(
 						'poll_option_id'	=> (int) sizeof($cur_poll_options) + 1 + sizeof($sql_insert_ary),
 						'topic_id'			=> (int) $data['topic_id'],
-						'poll_option_text'	=> (string) $poll['poll_options'][$i]
+						'poll_option_text'	=> (string) $poll['poll_options'][$i],
 					);
 				}
 				else if ($poll['poll_options'][$i] != $cur_poll_options[$i])
@@ -2054,7 +2054,7 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 		POSTS_TABLE		=> 'post_id = ' . $data['post_id'],
 		TOPICS_TABLE	=> 'topic_id = ' . $data['topic_id'],
 		FORUMS_TABLE	=> 'forum_id = ' . $data['forum_id'],
-		USERS_TABLE		=> 'user_id = ' . $poster_id
+		USERS_TABLE		=> 'user_id = ' . $poster_id,
 	);
 
 	foreach ($sql_data as $table => $update_ary)

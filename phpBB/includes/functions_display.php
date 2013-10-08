@@ -69,7 +69,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 					'UNREAD_POSTS'		=> $user->lang['UNREAD_POSTS'],
 					'U_MARK_FORUMS'		=> ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}index.$phpEx", 'hash=' . generate_link_hash('global') . '&mark=forums&mark_time=' . time()) : '',
 					'MESSAGE_TITLE'		=> $user->lang['INFORMATION'],
-					'MESSAGE_TEXT'		=> $user->lang['FORUMS_MARKED']
+					'MESSAGE_TEXT'		=> $user->lang['FORUMS_MARKED'],
 				);
 				$json_response = new \phpbb\json_response();
 				$json_response->send($data);
@@ -92,7 +92,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 	$sql_array = array(
 		'SELECT'	=> 'f.*',
 		'FROM'		=> array(
-			FORUMS_TABLE		=> 'f'
+			FORUMS_TABLE		=> 'f',
 		),
 		'LEFT_JOIN'	=> array(),
 	);
@@ -117,7 +117,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 	{
 		$sql_array['LEFT_JOIN'][] = array(
 			'FROM'	=> array(FORUMS_ACCESS_TABLE => 'fa'),
-			'ON'	=> "fa.forum_id = f.forum_id AND fa.session_id = '" . $db->sql_escape($user->session_id) . "'"
+			'ON'	=> "fa.forum_id = f.forum_id AND fa.session_id = '" . $db->sql_escape($user->session_id) . "'",
 		);
 
 		$sql_array['SELECT'] .= ', fa.user_id';
@@ -344,7 +344,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 					'UNREAD_POSTS'		=> $user->lang['UNREAD_POSTS'],
 					'U_MARK_FORUMS'		=> ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}viewforum.$phpEx", 'hash=' . generate_link_hash('global') . '&f=' . $root_data['forum_id'] . '&mark=forums&mark_time=' . time()) : '',
 					'MESSAGE_TITLE'		=> $user->lang['INFORMATION'],
-					'MESSAGE_TEXT'		=> $user->lang['FORUMS_MARKED']
+					'MESSAGE_TEXT'		=> $user->lang['FORUMS_MARKED'],
 				);
 				$json_response = new \phpbb\json_response();
 				$json_response->send($data);

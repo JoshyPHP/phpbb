@@ -3089,7 +3089,7 @@ function group_set_user_default($group_id, $user_id_ary, $group_attributes = fal
 	);
 
 	$sql_ary = array(
-		'group_id'		=> $group_id
+		'group_id'		=> $group_id,
 	);
 
 	// Were group attributes passed to the function? If not we need to obtain them

@@ -2452,7 +2452,7 @@ function phpbb_cache_moderators($db, $cache, $auth)
 						'user_id'		=> (int) $user_id,
 						'username'		=> (string) $usernames_ary[$user_id],
 						'group_id'		=> 0,
-						'group_name'	=> ''
+						'group_name'	=> '',
 					);
 				}
 			}
@@ -2515,7 +2515,7 @@ function phpbb_cache_moderators($db, $cache, $auth)
 					'user_id'		=> 0,
 					'username'		=> '',
 					'group_id'		=> (int) $group_id,
-					'group_name'	=> (string) $groupnames_ary[$group_id]
+					'group_name'	=> (string) $groupnames_ary[$group_id],
 				);
 			}
 		}

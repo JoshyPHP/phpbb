@@ -991,7 +991,7 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 
 					'POST_SUBJECT'		=> $row['post_subject'],
 					'POST_DATE'			=> (!empty($row['post_time'])) ? $user->format_date($row['post_time']) : '',
-					'MESSAGE'			=> $row['post_text']
+					'MESSAGE'			=> $row['post_text'],
 				);
 			}
 
@@ -1033,7 +1033,7 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 		{
 			$template->assign_vars(array(
 				'SEARCH_TOPIC'		=> $topic_title,
-				'U_SEARCH_TOPIC'	=> $view_topic_url
+				'U_SEARCH_TOPIC'	=> $view_topic_url,
 			));
 		}
 	}
@@ -1220,7 +1220,7 @@ if ($auth->acl_get('a_search'))
 			'KEYWORDS'	=> $keywords,
 			'TIME'		=> $user->format_date($row['search_time']),
 
-			'U_KEYWORDS'	=> append_sid("{$phpbb_root_path}search.$phpEx", 'keywords=' . urlencode(htmlspecialchars_decode($keywords)))
+			'U_KEYWORDS'	=> append_sid("{$phpbb_root_path}search.$phpEx", 'keywords=' . urlencode(htmlspecialchars_decode($keywords))),
 		));
 	}
 	$db->sql_freeresult($result);

@@ -91,7 +91,7 @@ class local extends \phpbb\avatar\driver\driver
 
 				$template->assign_block_vars('avatar_local_row.avatar_local_option', array(
 					'AVATAR_FILE' 		=> $img['filename'],
-					'S_OPTIONS_AVATAR'	=> $img['filename']
+					'S_OPTIONS_AVATAR'	=> $img['filename'],
 				));
 
 				$col_count = ($col_count + 1) % $table_cols;

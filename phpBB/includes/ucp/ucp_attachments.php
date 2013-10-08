@@ -57,7 +57,7 @@ class ucp_attachments
 		if ($delete && sizeof($delete_ids))
 		{
 			$s_hidden_fields = array(
-				'delete'	=> 1
+				'delete'	=> 1,
 			);
 
 			foreach ($delete_ids as $attachment_id)

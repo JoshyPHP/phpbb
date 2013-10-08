@@ -275,25 +275,25 @@ class utf_normalizer
 			// Leading bytes masks
 			"\xC0" => 2, "\xD0" => 2, "\xE0" => 3, "\xF0" => 4,
 			// Trailing bytes masks
-			"\x80" => 0, "\x90" => 0, "\xA0" => 0, "\xB0" => 0
+			"\x80" => 0, "\x90" => 0, "\xA0" => 0, "\xB0" => 0,
 		);
 
 		$extra_check = array(
 			"\xED" => 1, "\xEF" => 1, "\xC0" => 1, "\xC1" => 1, "\xE0" => 1, "\xF0" => 1,
 			"\xF4" => 1, "\xF5" => 1, "\xF6" => 1, "\xF7" => 1, "\xF8" => 1, "\xF9" => 1,
-			"\xFA" => 1, "\xFB" => 1, "\xFC" => 1, "\xFD" => 1, "\xFE" => 1, "\xFF" => 1
+			"\xFA" => 1, "\xFB" => 1, "\xFC" => 1, "\xFD" => 1, "\xFE" => 1, "\xFF" => 1,
 		);
 
 		$utf_validation_mask = array(
 			2	=> "\xE0\xC0",
 			3	=> "\xF0\xC0\xC0",
-			4	=> "\xF8\xC0\xC0\xC0"
+			4	=> "\xF8\xC0\xC0\xC0",
 		);
 
 		$utf_validation_check = array(
 			2	=> "\xC0\x80",
 			3	=> "\xE0\x80\x80",
-			4	=> "\xF0\x80\x80\x80"
+			4	=> "\xF0\x80\x80\x80",
 		);
 
 		// Main loop
@@ -959,14 +959,14 @@ class utf_normalizer
 			// Leading bytes masks
 			"\xC0" => 2, "\xD0" => 2, "\xE0" => 3, "\xF0" => 4,
 			// Trailing bytes masks
-			"\x80" => 0, "\x90" => 0, "\xA0" => 0, "\xB0" => 0
+			"\x80" => 0, "\x90" => 0, "\xA0" => 0, "\xB0" => 0,
 		);
 
 		// Some extra checks are triggered on the first byte of a UTF sequence
 		$extra_check = array(
 			"\xED" => 1, "\xEF" => 1, "\xC0" => 1, "\xC1" => 1, "\xE0" => 1, "\xF0" => 1,
 			"\xF4" => 1, "\xF5" => 1, "\xF6" => 1, "\xF7" => 1, "\xF8" => 1, "\xF9" => 1,
-			"\xFA" => 1, "\xFB" => 1, "\xFC" => 1, "\xFD" => 1, "\xFE" => 1, "\xFF" => 1
+			"\xFA" => 1, "\xFB" => 1, "\xFC" => 1, "\xFD" => 1, "\xFE" => 1, "\xFF" => 1,
 		);
 
 		// These masks are used to check if a UTF sequence is well formed. Here are the only 3 lengths we acknowledge:
@@ -977,13 +977,13 @@ class utf_normalizer
 		$utf_validation_mask = array(
 			2	=> "\xE0\xC0",
 			3	=> "\xF0\xC0\xC0",
-			4	=> "\xF8\xC0\xC0\xC0"
+			4	=> "\xF8\xC0\xC0\xC0",
 		);
 
 		$utf_validation_check = array(
 			2	=> "\xC0\x80",
 			3	=> "\xE0\x80\x80",
-			4	=> "\xF0\x80\x80\x80"
+			4	=> "\xF0\x80\x80\x80",
 		);
 
 		$tmp = '';

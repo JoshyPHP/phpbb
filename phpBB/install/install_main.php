@@ -25,7 +25,7 @@ if (!empty($setmodules))
 		'module_order'		=> 0,
 		'module_subs'		=> array('INTRO', 'LICENSE', 'SUPPORT'),
 		'module_stages'		=> '',
-		'module_reqs'		=> ''
+		'module_reqs'		=> '',
 	);
 }
 

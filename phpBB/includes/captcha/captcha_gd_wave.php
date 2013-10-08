@@ -54,11 +54,11 @@ class captcha
 		$box = array(
 			'upper_left'	=> array(
 				'x' => mt_rand(5, 15),
-				'y' => mt_rand(10, 15)
+				'y' => mt_rand(10, 15),
 			),
 			'upper_right'	=> array(
 				'x' => mt_rand($img_x - 35, $img_x - 19),
-				'y' => mt_rand(10, 17)
+				'y' => mt_rand(10, 17),
 			),
 			'lower_left'	=> array(
 				'x' => mt_rand($img_x - 45, $img_x - 5),
@@ -836,7 +836,7 @@ class captcha
 					array(0,0,0,0,0,0,0,0,0),
 					array(0,0,0,0,0,0,0,0,0),
 				),
-			)
+			),
 		);
 	}
 }

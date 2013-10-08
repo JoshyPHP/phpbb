@@ -827,7 +827,7 @@ class p_master
 				$tpl_ary = array(
 					'L_TITLE'		=> $item_ary['lang'],
 					'S_SELECTED'	=> (isset($this->module_cache['parents'][$item_ary['id']]) || $item_ary['id'] == $this->p_id) ? true : false,
-					'U_TITLE'		=> $u_title
+					'U_TITLE'		=> $u_title,
 				);
 
 				$template->assign_block_vars($use_tabular_offset, array_merge($tpl_ary, array_change_key_case($item_ary, CASE_UPPER)));
@@ -836,7 +836,7 @@ class p_master
 			$tpl_ary = array(
 				'L_TITLE'		=> $item_ary['lang'],
 				'S_SELECTED'	=> (isset($this->module_cache['parents'][$item_ary['id']]) || $item_ary['id'] == $this->p_id) ? true : false,
-				'U_TITLE'		=> $u_title
+				'U_TITLE'		=> $u_title,
 			);
 
 			$template->assign_block_vars($linear_offset, array_merge($tpl_ary, array_change_key_case($item_ary, CASE_UPPER)));

@@ -189,7 +189,7 @@ class oauth extends \phpbb\auth\provider\base
 			// Check to see if this provider is already assosciated with an account
 			$data = array(
 				'provider'	=> $service_name_original,
-				'oauth_provider_id'	=> $unique_id
+				'oauth_provider_id'	=> $unique_id,
 			);
 			$sql = 'SELECT user_id FROM ' . $this->auth_provider_oauth_token_account_assoc . '
 				WHERE ' . $this->db->sql_build_array('SELECT', $data);

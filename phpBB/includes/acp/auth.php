@@ -749,7 +749,7 @@ class auth_admin extends \phpbb\auth\auth
 					$add_options[] = array(
 						'auth_option'	=> (string) $option,
 						'is_global'		=> ($type == 'global' || $type == 'both') ? 1 : 0,
-						'is_local'		=> ($type == 'local' || $type == 'both') ? 1 : 0
+						'is_local'		=> ($type == 'local' || $type == 'both') ? 1 : 0,
 					);
 
 					continue;
@@ -909,7 +909,7 @@ class auth_admin extends \phpbb\auth\auth
 								$id_field			=> (int) $id,
 								'forum_id'			=> (int) $forum,
 								'auth_option_id'	=> (int) $auth_option_id,
-								'auth_setting'		=> (int) $setting
+								'auth_setting'		=> (int) $setting,
 							);
 						}
 					}
@@ -962,7 +962,7 @@ class auth_admin extends \phpbb\auth\auth
 				$sql_ary[] = array(
 					'role_id'			=> (int) $role_id,
 					'auth_option_id'	=> (int) $auth_option_id,
-					'auth_setting'		=> (int) $setting
+					'auth_setting'		=> (int) $setting,
 				);
 			}
 		}
@@ -973,7 +973,7 @@ class auth_admin extends \phpbb\auth\auth
 			$sql_ary[] = array(
 				'role_id'			=> (int) $role_id,
 				'auth_option_id'	=> (int) $this->acl_options['id'][$flag],
-				'auth_setting'		=> ACL_NEVER
+				'auth_setting'		=> ACL_NEVER,
 			);
 		}
 

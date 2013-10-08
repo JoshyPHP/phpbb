@@ -25,7 +25,7 @@ if (!empty($setmodules))
 		'module_order'		=> 20,
 		'module_subs'		=> '',
 		'module_stages'		=> array('INTRO', 'SETTINGS', 'IN_PROGRESS', 'FINAL'),
-		'module_reqs'		=> ''
+		'module_reqs'		=> '',
 	);
 }
 
@@ -304,7 +304,7 @@ class install_convert extends module
 						'dbpasswd'		=>	$convertor_data['dbpasswd'],
 						'dbname'		=>	$convertor_data['dbname'],
 						'table_prefix'	=>	$convertor_data['table_prefix'],
-						'author'		=>	$convertor_data['author']
+						'author'		=>	$convertor_data['author'],
 					);
 				}
 				unset($convertor_data);
@@ -799,7 +799,7 @@ class install_convert extends module
 					'avatar_gallery_path'	=> path($config['avatar_gallery_path']),
 					'icons_path'			=> path($config['icons_path']),
 					'ranks_path'			=> path($config['ranks_path']),
-					'smilies_path'			=> path($config['smilies_path'])
+					'smilies_path'			=> path($config['smilies_path']),
 				);
 
 				foreach ($local_paths as $folder => $local_path)

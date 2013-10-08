@@ -370,7 +370,7 @@ class fulltext_postgres extends \phpbb\search\base
 			$topic_id,
 			implode(',', $ex_fid_ary),
 			$post_visibility,
-			implode(',', $author_ary)
+			implode(',', $author_ary),
 		)));
 
 		if ($start < 0)
@@ -959,7 +959,7 @@ class fulltext_postgres extends \phpbb\search\base
 		// These are fields required in the config table
 		return array(
 			'tpl'		=> $tpl,
-			'config'	=> array('fulltext_postgres_ts_name' => 'string', 'fulltext_postgres_min_word_len' => 'integer:0:255', 'fulltext_postgres_max_word_len' => 'integer:0:255')
+			'config'	=> array('fulltext_postgres_ts_name' => 'string', 'fulltext_postgres_min_word_len' => 'integer:0:255', 'fulltext_postgres_max_word_len' => 'integer:0:255'),
 		);
 	}
 }

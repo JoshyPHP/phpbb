@@ -713,7 +713,7 @@ class fulltext_sphinx
 				),
 				'LEFT_JOIN'	=> array(array(
 					'FROM'	=> array(
-						POSTS_TABLE	=> 'p2'
+						POSTS_TABLE	=> 'p2',
 					),
 					'ON'	=> 'p1.topic_id = p2.topic_id',
 				)),
@@ -908,7 +908,7 @@ class fulltext_sphinx
 		// These are fields required in the config table
 		return array(
 			'tpl'		=> $tpl,
-			'config'	=> $config_vars
+			'config'	=> $config_vars,
 		);
 	}
 }

@@ -117,7 +117,7 @@ class acp_reasons
 							$sql_ary = array(
 								'reason_title'			=> (string) $reason_row['reason_title'],
 								'reason_description'	=> (string) $reason_row['reason_description'],
-								'reason_order'			=> $max_order + 1
+								'reason_order'			=> $max_order + 1,
 							);
 
 							$db->sql_query('INSERT INTO ' . REPORTS_REASONS_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary));

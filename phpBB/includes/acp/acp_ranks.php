@@ -69,7 +69,7 @@ class acp_ranks
 					'rank_title'		=> $rank_title,
 					'rank_special'		=> $special_rank,
 					'rank_min'			=> $min_posts,
-					'rank_image'		=> htmlspecialchars_decode($rank_image)
+					'rank_image'		=> htmlspecialchars_decode($rank_image),
 				);
 
 				if ($rank_id)
@@ -130,8 +130,8 @@ class acp_ranks
 							'MESSAGE_TITLE'	=> $user->lang['INFORMATION'],
 							'MESSAGE_TEXT'	=> $user->lang['RANK_REMOVED'],
 							'REFRESH_DATA'	=> array(
-								'time'	=> 3
-							)
+								'time'	=> 3,
+							),
 						));
 					}
 				}

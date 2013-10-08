@@ -35,7 +35,7 @@ if (!empty($setmodules))
 		'module_order'		=> 10,
 		'module_subs'		=> '',
 		'module_stages'		=> array('INTRO', 'REQUIREMENTS', 'DATABASE', 'ADMINISTRATOR', 'CONFIG_FILE', 'ADVANCED', 'CREATE_TABLE', 'FINAL'),
-		'module_reqs'		=> ''
+		'module_reqs'		=> '',
 	);
 }
 
@@ -297,7 +297,7 @@ class install_install extends module
 				array('func_overload', '&', MB_OVERLOAD_MAIL|MB_OVERLOAD_STRING),
 				array('encoding_translation', '!=', 0),
 				array('http_input', '!=', 'pass'),
-				array('http_output', '!=', 'pass')
+				array('http_output', '!=', 'pass'),
 			);
 
 			foreach ($checks as $mb_checks)

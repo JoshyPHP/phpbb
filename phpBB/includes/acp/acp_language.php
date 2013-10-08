@@ -171,7 +171,7 @@ class acp_language
 					'HIDDEN'	=> $hidden_data,
 
 					'S_CONNECTION_SUCCESS'		=> (request_var('test_connection', '') && $test_connection === true) ? true : false,
-					'S_CONNECTION_FAILED'		=> (request_var('test_connection', '') && $test_connection !== true) ? true : false
+					'S_CONNECTION_FAILED'		=> (request_var('test_connection', '') && $test_connection !== true) ? true : false,
 				));
 			break;
 
@@ -541,7 +541,7 @@ class acp_language
 				foreach ($methods as $method)
 				{
 					$template->assign_block_vars('buttons', array(
-						'VALUE' => $method
+						'VALUE' => $method,
 					));
 				}
 
@@ -553,7 +553,7 @@ class acp_language
 					'LANG_ENGLISH_NAME'	=> $lang_entries['lang_english_name'],
 					'LANG_ISO'			=> $lang_entries['lang_iso'],
 					'LANG_AUTHOR'		=> $lang_entries['lang_author'],
-					'ALLOW_UPLOAD'		=> sizeof($methods)
+					'ALLOW_UPLOAD'		=> sizeof($methods),
 					)
 				);
 
@@ -848,7 +848,7 @@ class acp_language
 					'iso'		=> $lang_iso,
 					'name'		=> trim(htmlspecialchars($file[0])),
 					'local_name'=> trim(htmlspecialchars($file[1], ENT_COMPAT, 'UTF-8')),
-					'author'	=> trim(htmlspecialchars($file[2], ENT_COMPAT, 'UTF-8'))
+					'author'	=> trim(htmlspecialchars($file[2], ENT_COMPAT, 'UTF-8')),
 				);
 				unset($file);
 
@@ -875,7 +875,7 @@ class acp_language
 					'lang_dir'			=> $lang_pack['iso'],
 					'lang_english_name'	=> $lang_pack['name'],
 					'lang_local_name'	=> $lang_pack['local_name'],
-					'lang_author'		=> $lang_pack['author']
+					'lang_author'		=> $lang_pack['author'],
 				);
 
 				$db->sql_query('INSERT INTO ' . LANG_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary));
@@ -1114,7 +1114,7 @@ class acp_language
 									'iso'		=> $file,
 									'name'		=> trim($iso[0]),
 									'local_name'=> trim($iso[1]),
-									'author'	=> trim($iso[2])
+									'author'	=> trim($iso[2]),
 								);
 							}
 						}

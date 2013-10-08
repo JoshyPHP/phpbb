@@ -434,7 +434,7 @@ class acp_users
 							$sql_ary = array(
 								'user_sig'					=> '',
 								'user_sig_bbcode_uid'		=> '',
-								'user_sig_bbcode_bitfield'	=> ''
+								'user_sig_bbcode_bitfield'	=> '',
 							);
 
 							$sql = 'UPDATE ' . USERS_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . "
@@ -793,7 +793,7 @@ class acp_users
 						$check_ary += array(
 							'username'			=> array(
 								array('string', false, $config['min_name_chars'], $config['max_name_chars']),
-								array('username', $user_row['username'])
+								array('username', $user_row['username']),
 							),
 						);
 					}
@@ -804,7 +804,7 @@ class acp_users
 						$check_ary += array(
 							'email'				=> array(
 								array('string', false, 6, 60),
-								array('email', $user_row['user_email'])
+								array('email', $user_row['user_email']),
 							),
 						);
 					}
@@ -1937,7 +1937,7 @@ class acp_users
 							'user_sig'					=> (string) $message_parser->message,
 							'user_options'				=> $user_row['user_options'],
 							'user_sig_bbcode_uid'		=> (string) $message_parser->bbcode_uid,
-							'user_sig_bbcode_bitfield'	=> (string) $message_parser->bbcode_bitfield
+							'user_sig_bbcode_bitfield'	=> (string) $message_parser->bbcode_bitfield,
 						);
 
 						$sql = 'UPDATE ' . USERS_TABLE . '

@@ -89,7 +89,7 @@ class acp_styles
 
 		$this->template->assign_vars(array(
 			'U_ACTION'			=> $this->u_base_action,
-			'S_HIDDEN_FIELDS'	=> build_hidden_fields($this->s_hidden_fields)
+			'S_HIDDEN_FIELDS'	=> build_hidden_fields($this->s_hidden_fields),
 			)
 		);
 
@@ -231,7 +231,7 @@ class acp_styles
 		// Confirm box
 		$s_hidden = build_hidden_fields(array(
 			'action'	=> 'uninstall',
-			'ids'		=> $ids
+			'ids'		=> $ids,
 		));
 		$this->template->assign_var('S_CONFIRM_DELETE', true);
 		confirm_box(false, $this->user->lang['CONFIRM_UNINSTALL_STYLES'], $s_hidden, 'acp_styles.html');
@@ -551,7 +551,7 @@ class acp_styles
 			'STYLE_COPYRIGHT'	=> strip_tags($style['style_copyright']),
 			'STYLE_PARENT'		=> $style['style_parent_id'],
 			'S_STYLE_ACTIVE'	=> $style['style_active'],
-			'S_STYLE_DEFAULT'	=> ($style['style_id'] == $this->default_style)
+			'S_STYLE_DEFAULT'	=> ($style['style_id'] == $this->default_style),
 			)
 		);
 	}
@@ -640,7 +640,7 @@ class acp_styles
 		$this->styles_list_cols = 3;
 		$this->template->assign_vars(array(
 			'STYLES_LIST_COLS'	=> $this->styles_list_cols,
-			'STYLES_LIST_HIDE_COUNT'	=> true
+			'STYLES_LIST_HIDE_COUNT'	=> true,
 			)
 		);
 
@@ -871,7 +871,7 @@ class acp_styles
 					'style_path'	=> $style['style_path'],
 					'style_parent_id'	=> $style['style_parent_id'],
 					'style_parent_tree'	=> $style['style_parent_tree'],
-					'level'			=> $level
+					'level'			=> $level,
 				);
 				$results = array_merge($results, $this->find_possible_parents($styles, $id, $style['style_id'], $level + 1));
 			}
@@ -914,7 +914,7 @@ class acp_styles
 
 			// The following variables should be used by hooks to add custom HTML code
 			'EXTRA'			=> '',
-			'EXTRA_OPTIONS'	=> ''
+			'EXTRA_OPTIONS'	=> '',
 		);
 
 		// Status specific data
@@ -925,7 +925,7 @@ class acp_styles
 			// Details
 			$actions[] = array(
 				'U_ACTION'	=> $this->u_action . '&amp;action=details&amp;id=' . $style['style_id'],
-				'L_ACTION'	=> $this->user->lang['DETAILS']
+				'L_ACTION'	=> $this->user->lang['DETAILS'],
 			);
 
 			// Activate/Deactive
@@ -933,7 +933,7 @@ class acp_styles
 
 			$actions[] = array(
 				'U_ACTION'	=> $this->u_action . '&amp;action=' . $action_name . '&amp;hash=' . generate_link_hash($action_name) . '&amp;id=' . $style['style_id'],
-				'L_ACTION'	=> $this->user->lang['STYLE_' . ($style['style_active'] ? 'DE' : '') . 'ACTIVATE']
+				'L_ACTION'	=> $this->user->lang['STYLE_' . ($style['style_active'] ? 'DE' : '') . 'ACTIVATE'],
 			);
 
 /*			// Export
@@ -945,13 +945,13 @@ class acp_styles
 			// Uninstall
 			$actions[] = array(
 				'U_ACTION'	=> $this->u_action . '&amp;action=uninstall&amp;hash=' . generate_link_hash('uninstall') . '&amp;id=' . $style['style_id'],
-				'L_ACTION'	=> $this->user->lang['STYLE_UNINSTALL']
+				'L_ACTION'	=> $this->user->lang['STYLE_UNINSTALL'],
 			);
 
 			// Preview
 			$actions[] = array(
 				'U_ACTION'	=> append_sid($this->phpbb_root_path . 'index.' . $this->php_ext, 'style=' . $style['style_id']),
-				'L_ACTION'	=> $this->user->lang['PREVIEW']
+				'L_ACTION'	=> $this->user->lang['PREVIEW'],
 			);
 		}
 		else
@@ -960,14 +960,14 @@ class acp_styles
 			if (empty($style['_available']))
 			{
 				$actions[] = array(
-					'HTML'		=> $this->user->lang['CANNOT_BE_INSTALLED']
+					'HTML'		=> $this->user->lang['CANNOT_BE_INSTALLED'],
 				);
 			}
 			else
 			{
 				$actions[] = array(
 					'U_ACTION'	=> $this->u_action . '&amp;action=install&amp;hash=' . generate_link_hash('install') . '&amp;dir=' . urlencode($style['style_path']),
-					'L_ACTION'	=> $this->user->lang['INSTALL_STYLE']
+					'L_ACTION'	=> $this->user->lang['INSTALL_STYLE'],
 				);
 			}
 		}
@@ -990,7 +990,7 @@ class acp_styles
 				'active'	=> 0,
 				'inactive'	=> 0,
 				'caninstall'	=> 0,
-				'cannotinstall'	=> 0
+				'cannotinstall'	=> 0,
 				);
 		}
 		$this->style_counters[$counter]++;
@@ -1007,7 +1007,7 @@ class acp_styles
 	{
 		$this->template->assign_vars(array(
 			'L_TITLE'	=> $this->user->lang[$title],
-			'L_EXPLAIN'	=> (isset($this->user->lang[$description])) ? $this->user->lang[$description] : ''
+			'L_EXPLAIN'	=> (isset($this->user->lang[$description])) ? $this->user->lang[$description] : '',
 			)
 		);
 	}

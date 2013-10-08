@@ -105,7 +105,7 @@ class ucp_groups
 							{
 								$s_hidden_fields = array(
 									'default'		=> $group_id,
-									'change_default'=> true
+									'change_default'=> true,
 								);
 
 								confirm_box(false, sprintf($user->lang['GROUP_CHANGE_DEFAULT'], $group_row[$group_id]['group_name']), build_hidden_fields($s_hidden_fields));
@@ -153,7 +153,7 @@ class ucp_groups
 								$s_hidden_fields = array(
 									'selected'		=> $group_id,
 									'action'		=> 'resign',
-									'submit'		=> true
+									'submit'		=> true,
 								);
 
 								confirm_box(false, ($row['user_pending']) ? 'GROUP_RESIGN_PENDING' : 'GROUP_RESIGN_MEMBERSHIP', build_hidden_fields($s_hidden_fields));
@@ -209,7 +209,7 @@ class ucp_groups
 								$s_hidden_fields = array(
 									'selected'		=> $group_id,
 									'action'		=> 'join',
-									'submit'		=> true
+									'submit'		=> true,
 								);
 
 								confirm_box(false, ($group_row[$group_id]['group_type'] == GROUP_FREE) ? 'GROUP_JOIN' : 'GROUP_JOIN_PENDING', build_hidden_fields($s_hidden_fields));
@@ -244,7 +244,7 @@ class ucp_groups
 								$s_hidden_fields = array(
 									'selected'		=> $group_id,
 									'action'		=> 'demote',
-									'submit'		=> true
+									'submit'		=> true,
 								);
 
 								confirm_box(false, 'USER_GROUP_DEMOTE', build_hidden_fields($s_hidden_fields));
@@ -589,7 +589,7 @@ class ucp_groups
 									'text'			=> $group_desc,
 									'allow_bbcode'	=> $allow_desc_bbcode,
 									'allow_smilies'	=> $allow_desc_smilies,
-									'allow_urls'	=> $allow_desc_urls
+									'allow_urls'	=> $allow_desc_urls,
 								);
 							}
 						}
@@ -600,7 +600,7 @@ class ucp_groups
 								'text'			=> '',
 								'allow_bbcode'	=> true,
 								'allow_smilies'	=> true,
-								'allow_urls'	=> true
+								'allow_urls'	=> true,
 							);
 							$group_rank = 0;
 							$group_type = GROUP_OPEN;
@@ -1037,7 +1037,7 @@ class ucp_groups
 								'g'			=> $group_id,
 								'i'			=> $id,
 								'mode'		=> $mode,
-								'action'	=> $action
+								'action'	=> $action,
 							);
 
 							confirm_box(false, $user->lang('GROUP_CONFIRM_ADD_USERS', sizeof($name_ary), implode($user->lang['COMMA_SEPARATOR'], $name_ary)), build_hidden_fields($s_hidden_fields));

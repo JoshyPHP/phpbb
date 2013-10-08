@@ -491,7 +491,7 @@ class ucp_profile
 								'user_sig'					=> (string) $message_parser->message,
 								'user_options'				=> $user->data['user_options'],
 								'user_sig_bbcode_uid'		=> (string) $message_parser->bbcode_uid,
-								'user_sig_bbcode_bitfield'	=> $message_parser->bbcode_bitfield
+								'user_sig_bbcode_bitfield'	=> $message_parser->bbcode_bitfield,
 							);
 
 							$sql = 'UPDATE ' . USERS_TABLE . '

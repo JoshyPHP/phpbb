@@ -103,7 +103,7 @@ class acp_forums
 
 				case 'edit':
 					$forum_data = array(
-						'forum_id'		=>	$forum_id
+						'forum_id'		=>	$forum_id,
 					);
 
 				// No break here
@@ -487,14 +487,14 @@ class acp_forums
 					'text'			=> $forum_data['forum_rules'],
 					'allow_bbcode'	=> true,
 					'allow_smilies'	=> true,
-					'allow_urls'	=> true
+					'allow_urls'	=> true,
 				);
 
 				$forum_desc_data = array(
 					'text'			=> $forum_data['forum_desc'],
 					'allow_bbcode'	=> true,
 					'allow_smilies'	=> true,
-					'allow_urls'	=> true
+					'allow_urls'	=> true,
 				);
 
 				$forum_rules_preview = '';
@@ -1853,7 +1853,7 @@ class acp_forums
 						TOPICS_POSTED_TABLE,
 						POLL_OPTIONS_TABLE,
 						POLL_VOTES_TABLE,
-					)
+					),
 				);
 
 				// Amount of rows we select and delete in one iteration.

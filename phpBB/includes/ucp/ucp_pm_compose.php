@@ -416,7 +416,7 @@ function compose_pm($id, $mode, $action, $user_folders = array())
 			$s_hidden_fields = array(
 				'p'			=> $msg_id,
 				'f'			=> $folder_id,
-				'action'	=> 'delete'
+				'action'	=> 'delete',
 			);
 
 			// "{$phpbb_root_path}ucp.$phpEx?i=pm&amp;mode=compose"
@@ -557,7 +557,7 @@ function compose_pm($id, $mode, $action, $user_folders = array())
 					'forum_id'		=> 0,
 					'save_time'		=> $current_time,
 					'draft_subject'	=> $subject,
-					'draft_message'	=> $message
+					'draft_message'	=> $message,
 					)
 				);
 				$db->sql_query($sql);
@@ -726,7 +726,7 @@ function compose_pm($id, $mode, $action, $user_folders = array())
 				'message'				=> $message_parser->message,
 				'attachment_data'		=> $message_parser->attachment_data,
 				'filename_data'			=> $message_parser->filename_data,
-				'address_list'			=> $address_list
+				'address_list'			=> $address_list,
 			);
 
 			// ((!$message_subject) ? $subject : $message_subject)

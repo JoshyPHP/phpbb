@@ -499,7 +499,7 @@ class custom_profile
 					'PROFILE_' . strtoupper($ident) . '_NAME'	=> $ident_ary['data']['lang_name'],
 					'PROFILE_' . strtoupper($ident) . '_EXPLAIN'=> $ident_ary['data']['lang_explain'],
 
-					'S_PROFILE_' . strtoupper($ident)			=> true
+					'S_PROFILE_' . strtoupper($ident)			=> true,
 				);
 
 				$tpl_fields['blockrow'][] = array(
@@ -508,7 +508,7 @@ class custom_profile
 					'PROFILE_FIELD_NAME'	=> $ident_ary['data']['lang_name'],
 					'PROFILE_FIELD_EXPLAIN'	=> $ident_ary['data']['lang_explain'],
 
-					'S_PROFILE_' . strtoupper($ident)		=> true
+					'S_PROFILE_' . strtoupper($ident)		=> true,
 				);
 			}
 
@@ -1043,7 +1043,7 @@ class custom_profile_admin extends custom_profile
 			0 => array('TITLE' => $user->lang['FIELD_LENGTH'],		'FIELD' => '<input type="number" min="0" name="field_length" size="5" value="' . $this->vars['field_length'] . '" />'),
 			1 => array('TITLE' => $user->lang['MIN_FIELD_CHARS'],	'FIELD' => '<input type="number" min="0" name="field_minlen" size="5" value="' . $this->vars['field_minlen'] . '" />'),
 			2 => array('TITLE' => $user->lang['MAX_FIELD_CHARS'],	'FIELD' => '<input type="number" min="0" size="5" value="' . $this->vars['field_maxlen'] . '" />'),
-			3 => array('TITLE' => $user->lang['FIELD_VALIDATION'],	'FIELD' => '<select name="field_validation">' . $this->validate_options() . '</select>')
+			3 => array('TITLE' => $user->lang['FIELD_VALIDATION'],	'FIELD' => '<select name="field_validation">' . $this->validate_options() . '</select>'),
 		);
 
 		return $options;
@@ -1060,7 +1060,7 @@ class custom_profile_admin extends custom_profile
 			0 => array('TITLE' => $user->lang['FIELD_LENGTH'],		'FIELD' => '<input type="number" min="0" max="99999" name="rows" size="5" value="' . $this->vars['rows'] . '" /> ' . $user->lang['ROWS'] . '</dd><dd><input type="number" min="0" max="99999" name="columns" size="5" value="' . $this->vars['columns'] . '" /> ' . $user->lang['COLUMNS'] . ' <input type="hidden" name="field_length" value="' . $this->vars['field_length'] . '" />'),
 			1 => array('TITLE' => $user->lang['MIN_FIELD_CHARS'],	'FIELD' => '<input type="number" min="0" max="9999999999" name="field_minlen" size="10" value="' . $this->vars['field_minlen'] . '" />'),
 			2 => array('TITLE' => $user->lang['MAX_FIELD_CHARS'],	'FIELD' => '<input type="number" min="0" max="9999999999" name="field_maxlen" size="10" value="' . $this->vars['field_maxlen'] . '" />'),
-			3 => array('TITLE' => $user->lang['FIELD_VALIDATION'],	'FIELD' => '<select name="field_validation">' . $this->validate_options() . '</select>')
+			3 => array('TITLE' => $user->lang['FIELD_VALIDATION'],	'FIELD' => '<select name="field_validation">' . $this->validate_options() . '</select>'),
 		);
 
 		return $options;
@@ -1077,7 +1077,7 @@ class custom_profile_admin extends custom_profile
 			0 => array('TITLE' => $user->lang['FIELD_LENGTH'],		'FIELD' => '<input type="number" min="0" max="99999" name="field_length" size="5" value="' . $this->vars['field_length'] . '" />'),
 			1 => array('TITLE' => $user->lang['MIN_FIELD_NUMBER'],	'FIELD' => '<input type="number" min="0" max="99999" name="field_minlen" size="5" value="' . $this->vars['field_minlen'] . '" />'),
 			2 => array('TITLE' => $user->lang['MAX_FIELD_NUMBER'],	'FIELD' => '<input type="number" min="0" max="99999" name="field_maxlen" size="5" value="' . $this->vars['field_maxlen'] . '" />'),
-			3 => array('TITLE' => $user->lang['DEFAULT_VALUE'],		'FIELD' => '<input type="post" name="field_default_value" value="' . $this->vars['field_default_value'] . '" />')
+			3 => array('TITLE' => $user->lang['DEFAULT_VALUE'],		'FIELD' => '<input type="post" name="field_default_value" value="' . $this->vars['field_default_value'] . '" />'),
 		);
 
 		return $options;
@@ -1102,12 +1102,12 @@ class custom_profile_admin extends custom_profile
 			'field_ident'			=> 'field_default_value',
 			'field_type'			=> FIELD_BOOL,
 			'field_length'			=> $this->vars['field_length'],
-			'lang_options'			=> $this->vars['lang_options']
+			'lang_options'			=> $this->vars['lang_options'],
 		);
 
 		$options = array(
 			0 => array('TITLE' => $user->lang['FIELD_TYPE'], 'EXPLAIN' => $user->lang['BOOL_TYPE_EXPLAIN'], 'FIELD' => '<label><input type="radio" class="radio" name="field_length" value="1"' . (($this->vars['field_length'] == 1) ? ' checked="checked"' : '') . ' onchange="document.getElementById(\'add_profile_field\').submit();" /> ' . $user->lang['RADIO_BUTTONS'] . '</label><label><input type="radio" class="radio" name="field_length" value="2"' . (($this->vars['field_length'] == 2) ? ' checked="checked"' : '') . ' onchange="document.getElementById(\'add_profile_field\').submit();" /> ' . $user->lang['CHECKBOX'] . '</label>'),
-			1 => array('TITLE' => $user->lang['DEFAULT_VALUE'], 'FIELD' => $this->process_field_row('preview', $profile_row))
+			1 => array('TITLE' => $user->lang['DEFAULT_VALUE'], 'FIELD' => $this->process_field_row('preview', $profile_row)),
 		);
 
 		return $options;
@@ -1131,7 +1131,7 @@ class custom_profile_admin extends custom_profile
 			'field_default_value'	=> $this->vars['field_default_value'],
 			'field_ident'			=> 'field_default_value',
 			'field_type'			=> FIELD_DROPDOWN,
-			'lang_options'			=> $this->vars['lang_options']
+			'lang_options'			=> $this->vars['lang_options'],
 		);
 
 		$profile_row[1] = $profile_row[0];
@@ -1141,7 +1141,7 @@ class custom_profile_admin extends custom_profile
 
 		$options = array(
 			0 => array('TITLE' => $user->lang['DEFAULT_VALUE'], 'FIELD' => $this->process_field_row('preview', $profile_row[0])),
-			1 => array('TITLE' => $user->lang['NO_VALUE_OPTION'], 'EXPLAIN' => $user->lang['NO_VALUE_OPTION_EXPLAIN'], 'FIELD' => $this->process_field_row('preview', $profile_row[1]))
+			1 => array('TITLE' => $user->lang['NO_VALUE_OPTION'], 'EXPLAIN' => $user->lang['NO_VALUE_OPTION_EXPLAIN'], 'FIELD' => $this->process_field_row('preview', $profile_row[1])),
 		);
 
 		return $options;
@@ -1164,7 +1164,7 @@ class custom_profile_admin extends custom_profile
 			'field_default_value'	=> $this->vars['field_default_value'],
 			'field_ident'			=> 'field_default_value',
 			'field_type'			=> FIELD_DATE,
-			'field_length'			=> $this->vars['field_length']
+			'field_length'			=> $this->vars['field_length'],
 		);
 
 		$always_now = request_var('always_now', -1);
