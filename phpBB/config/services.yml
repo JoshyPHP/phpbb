@@ -22,7 +22,6 @@ services:
         arguments:
             - @config
             - @avatar.driver_collection
-            - @service_container
 
     cache:
         class: phpbb\cache\service
@@ -257,6 +256,15 @@ services:
 
     php_ini:
         class: phpbb\php\ini
+
+    plupload:
+        class: phpbb\plupload\plupload
+        arguments:
+            - %core.root_path%
+            - @config
+            - @request
+            - @user
+            - @php_ini
 
     request:
         class: phpbb\request\request

@@ -2866,7 +2866,7 @@ function build_url($strip_vars = false)
 	$url_parts = parse_url($page);
 
 	// URL
-	if ($url_parts !== false && !empty($url_parts['scheme']) && !empty($url_parts['host']))
+	if ($url_parts === false || empty($url_parts['scheme']) || empty($url_parts['host']))
 	{
 		$page = $phpbb_root_path . $page;
 	}
@@ -5124,7 +5124,7 @@ function phpbb_build_hidden_fields_for_query_params($request, $exclude = null)
 function page_header($page_title = '', $display_online_list = true, $item_id = 0, $item = 'forum')
 {
 	global $db, $config, $template, $SID, $_SID, $_EXTRA_URL, $user, $auth, $phpEx, $phpbb_root_path;
-	global $phpbb_dispatcher, $request, $phpbb_container, $adm_relative_path;
+	global $phpbb_dispatcher, $request, $phpbb_container, $phpbb_admin_path;
 
 	if (defined('HEADER_INC'))
 	{
@@ -5225,16 +5225,13 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		$l_online_time = $user->lang('VIEW_ONLINE_TIMES', (int) $config['load_online_time']);
 	}
 
-	$l_privmsgs_text = $l_privmsgs_text_unread = '';
 	$s_privmsg_new = false;
 
-	// Obtain number of new private messages if user is logged in
+	// Check for new private messages if user is logged in
 	if (!empty($user->data['is_registered']))
 	{
 		if ($user->data['user_new_privmsg'])
 		{
-			$l_privmsgs_text = $user->lang('NEW_PMS', (int) $user->data['user_new_privmsg']);
-
 			if (!$user->data['user_last_privmsg'] || $user->data['user_last_privmsg'] > $user->data['session_last_visit'])
 			{
 				$sql = 'UPDATE ' . USERS_TABLE . '
@@ -5251,15 +5248,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		}
 		else
 		{
-			$l_privmsgs_text = $user->lang('NEW_PMS', 0);
 			$s_privmsg_new = false;
-		}
-
-		$l_privmsgs_text_unread = '';
-
-		if ($user->data['user_unread_privmsg'] && $user->data['user_unread_privmsg'] != $user->data['user_new_privmsg'])
-		{
-			$l_privmsgs_text_unread = $user->lang('UNREAD_PMS', (int) $user->data['user_unread_privmsg']);
 		}
 	}
 
@@ -5350,12 +5339,11 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'TOTAL_USERS_ONLINE'			=> $l_online_users,
 		'LOGGED_IN_USER_LIST'			=> $online_userlist,
 		'RECORD_USERS'					=> $l_online_record,
-		'PRIVATE_MESSAGE_INFO'			=> $l_privmsgs_text,
-		'PRIVATE_MESSAGE_INFO_UNREAD'	=> $l_privmsgs_text_unread,
+		'PRIVATE_MESSAGE_COUNT'			=> (!empty($user->data['user_unread_privmsg'])) ? $user->data['user_unread_privmsg'] : 0,
 		'HIDDEN_FIELDS_FOR_JUMPBOX'	=> $hidden_fields_for_jumpbox,
 
 		'UNREAD_NOTIFICATIONS_COUNT'	=> ($notifications !== false) ? $notifications['unread_count'] : '',
-		'NOTIFICATIONS_COUNT'			=> ($notifications !== false) ? $user->lang('NOTIFICATIONS_COUNT', $notifications['unread_count']) : '',
+		'NOTIFICATIONS_COUNT'			=> ($notifications !== false) ? $notifications['unread_count'] : '',
 		'U_VIEW_ALL_NOTIFICATIONS'		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=ucp_notifications'),
 		'U_NOTIFICATION_SETTINGS'		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=ucp_notifications&amp;mode=notification_options'),
 		'S_NOTIFICATIONS_DISPLAY'		=> $config['load_notifications'],
@@ -5423,7 +5411,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'S_FORUM_ID'			=> $forum_id,
 		'S_TOPIC_ID'			=> $topic_id,
 
-		'S_LOGIN_ACTION'		=> ((!defined('ADMIN_START')) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login') : append_sid("{$phpbb_root_path}{$adm_relative_path}index.$phpEx", false, true, $user->session_id)),
+		'S_LOGIN_ACTION'		=> ((!defined('ADMIN_START')) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login') : append_sid("{$phpbb_admin_path}index.$phpEx", false, true, $user->session_id)),
 		'S_LOGIN_REDIRECT'		=> build_hidden_fields(array('redirect' => build_url())),
 
 		'S_ENABLE_FEEDS'			=> ($config['feed_enable']) ? true : false,
@@ -5451,8 +5439,8 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'T_UPLOAD_PATH'			=> "{$web_path}{$config['upload_path']}/",
 		'T_STYLESHEET_LINK'		=> "{$web_path}styles/" . rawurlencode($user->style['style_path']) . '/theme/stylesheet.css?assets_version=' . $config['assets_version'],
 		'T_STYLESHEET_LANG_LINK'    => "{$web_path}styles/" . rawurlencode($user->style['style_path']) . '/theme/' . $user->lang_name . '/stylesheet.css?assets_version=' . $config['assets_version'],
-		'T_JQUERY_LINK'			=> ($config['load_jquery_cdn'] && !empty($config['load_jquery_url'])) ? $config['load_jquery_url'] : "{$web_path}assets/javascript/jquery.js?assets_version=" . $config['assets_version'],
-		'S_JQUERY_FALLBACK'		=> ($config['load_jquery_cdn']) ? true : false,
+		'T_JQUERY_LINK'			=> !empty($config['allow_cdn']) && !empty($config['load_jquery_url']) ? $config['load_jquery_url'] : "{$web_path}assets/javascript/jquery.js?assets_version=" . $config['assets_version'],
+		'S_ALLOW_CDN'			=> !empty($config['allow_cdn']),
 
 		'T_THEME_NAME'			=> rawurlencode($user->style['style_path']),
 		'T_THEME_LANG_NAME'		=> $user->data['user_lang'],
