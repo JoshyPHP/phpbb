@@ -41,10 +41,10 @@ function convert_file($filepath)
 
 	$n = 0;
 	$enter_array = false;
-	$in_array    = [false];
+	$in_array    = array(false);
 
 	$line  = 0;
-	$lines = [];
+	$lines = array();
 
 	foreach ($tokens as $k => $token)
 	{
