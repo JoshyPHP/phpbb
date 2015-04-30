@@ -41,11 +41,10 @@ class parser implements \phpbb\textformatter\parser_interface
 	*
 	* @param \phpbb\cache\driver_interface $cache
 	* @param string $key Cache key
-	* @param \phpbb\user $user
 	* @param factory $factory
 	* @param \phpbb\event\dispatcher_interface $dispatcher
 	*/
-	public function __construct(\phpbb\cache\driver\driver_interface $cache, $key, \phpbb\user $user, factory $factory, \phpbb\event\dispatcher_interface $dispatcher)
+	public function __construct(\phpbb\cache\driver\driver_interface $cache, $key, factory $factory, \phpbb\event\dispatcher_interface $dispatcher)
 	{
 		$parser = $cache->get($key);
 		if (!$parser)
@@ -56,25 +55,45 @@ class parser implements \phpbb\textformatter\parser_interface
 
 		$this->dispatcher = $dispatcher;
 		$this->parser = $parser;
-		$this->user = $user;
 		$parser = $this;
 
 		/**
 		* Configure the parser service
 		*
 		* Can be used to:
-		*  - toggle features according to the user's preferences,
-		*  - toggle BBCodes according to the user's permissions,
 		*  - register variables or custom parsers in the s9e\TextFormatter
 		*  - configure the s9e\TextFormatter parser
 		*
 		* @event core.text_formatter_s9e_parser_setup
 		* @var \phpbb\textformatter\s9e\parser parser This parser service
-		* @var \phpbb\user user Current user
+		* @since 3.2.0-a1
+		*/
+		$vars = array('parser');
+		extract($dispatcher->trigger_event('core.text_formatter_s9e_parser_setup', compact($vars)));
+	}
+
+	/**
+	* {@inheritdoc}
+	*/
+	public function configure_user(\phpbb\user $user)
+	{
+		$this->user = $user;
+		$parser = $this;
+
+		/**
+		* Configure the parser service for given user
+		*
+		* Can be used to:
+		*  - toggle features according to the user's preferences
+		*  - toggle BBCodes according to the user's permissions
+		*
+		* @event core.text_formatter_s9e_parser_configure_user
+		* @var \phpbb\textformatter\s9e\parser parser This parser service
+		* @var \phpbb\user user User object
 		* @since 3.2.0-a1
 		*/
 		$vars = array('parser', 'user');
-		extract($dispatcher->trigger_event('core.text_formatter_s9e_parser_setup', compact($vars)));
+		extract($this->dispatcher->trigger_event('core.text_formatter_s9e_parser_configure_user', compact($vars)));
 	}
 
 	/**
@@ -202,7 +221,6 @@ class parser implements \phpbb\textformatter\parser_interface
 	public function get_errors()
 	{
 		$errors = array();
-
 		foreach ($this->parser->getLogger()->get() as $entry)
 		{
 			list($type, $msg, $context) = $entry;
@@ -211,29 +229,29 @@ class parser implements \phpbb\textformatter\parser_interface
 			{
 				if ($context['tagName'] === 'E')
 				{
-					$errors[] = $this->user->lang('TOO_MANY_SMILIES', $context['tagLimit']);
+					$errors[] = $this->lang('TOO_MANY_SMILIES', $context['tagLimit']);
 				}
 				else if ($context['tagName'] === 'URL')
 				{
-					$errors[] = $this->user->lang('TOO_MANY_URLS', $context['tagLimit']);
+					$errors[] = $this->lang('TOO_MANY_URLS', $context['tagLimit']);
 				}
 			}
 			else if ($msg === 'MAX_FONT_SIZE_EXCEEDED')
 			{
-				$errors[] = $this->user->lang($msg, $context['max_size']);
+				$errors[] = $this->lang($msg, $context['max_size']);
 			}
 			else if (preg_match('/^MAX_(?:FLASH|IMG)_(HEIGHT|WIDTH)_EXCEEDED$/D', $msg, $m))
 			{
-				$errors[] = $this->user->lang($msg, $context['max_' . strtolower($m[1])]);
+				$errors[] = $this->lang($msg, $context['max_' . strtolower($m[1])]);
 			}
 			else if ($msg === 'Tag is disabled')
 			{
 				$name = strtolower($context['tag']->getName());
-				$errors[] = $this->user->lang('UNAUTHORISED_BBCODE', '[' . $name . ']');
+				$errors[] = $this->lang('UNAUTHORISED_BBCODE', '[' . $name . ']');
 			}
 			else if ($msg === 'UNABLE_GET_IMAGE_SIZE')
 			{
-				$errors[] = $this->user->lang($msg);
+				$errors[] = $this->lang($msg);
 			}
 		}
 
@@ -396,5 +414,21 @@ class parser implements \phpbb\textformatter\parser_interface
 		}
 
 		return $url;
+	}
+
+	/**
+	* Localize given message for the configured user
+	*
+	* @param  string $msg Original message
+	* @return string      Translated message
+	*/
+	protected function lang($msg)
+	{
+		if (!isset($this->user))
+		{
+			return $msg;
+		}
+
+		return call_user_func_array(array($this->user, 'lang'), func_get_args());
 	}
 }

@@ -492,11 +492,9 @@ class phpbb_test_case_helpers
 		$parser = new \phpbb\textformatter\s9e\parser(
 			$cache,
 			$cache_key_parser,
-			$user,
 			$factory,
 			$dispatcher
 		);
-
 		$container->set('text_formatter.parser', $parser);
 		$container->set('text_formatter.s9e.parser', $parser);
 
@@ -515,6 +513,7 @@ class phpbb_test_case_helpers
 		$auth = ($container->has('auth')) ? $container->get('auth') : new \phpbb\auth\auth;
 
 		// Calls configured in services.yml
+		$parser->configure_user($user);
 		$renderer->configure_smilies_path($config, $container->get('path_helper'));
 		$renderer->configure_user($user, $config, $auth);
 

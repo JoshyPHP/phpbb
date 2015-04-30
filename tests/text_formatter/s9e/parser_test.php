@@ -35,10 +35,11 @@ class phpbb_textformatter_s9e_parser_test extends phpbb_test_case
 		$parser = new \phpbb\textformatter\s9e\parser(
 			$cache,
 			'_foo_parser',
-			$this->getMockBuilder('phpbb\\user')->disableOriginalConstructor()->getMock(),
 			$factory,
 			new phpbb_mock_event_dispatcher
 		);
+		$user = $this->getMockBuilder('phpbb\\user')->disableOriginalConstructor()->getMock();
+		$parser->configure_user($user);
 	}
 
 	public function test_use_from_cache()
@@ -63,10 +64,11 @@ class phpbb_textformatter_s9e_parser_test extends phpbb_test_case
 		$parser = new \phpbb\textformatter\s9e\parser(
 			$cache,
 			'_foo_parser',
-			$this->getMockBuilder('phpbb\\user')->disableOriginalConstructor()->getMock(),
 			$factory,
 			new phpbb_mock_event_dispatcher
 		);
+		$user = $this->getMockBuilder('phpbb\\user')->disableOriginalConstructor()->getMock();
+		$parser->configure_user($user);
 
 		$this->assertSame('<t>test</t>', $parser->parse('test'));
 	}
@@ -92,10 +94,11 @@ class phpbb_textformatter_s9e_parser_test extends phpbb_test_case
 		$parser = new \phpbb\textformatter\s9e\parser(
 			new phpbb_mock_cache,
 			'_foo_parser',
-			$this->getMockBuilder('phpbb\\user')->disableOriginalConstructor()->getMock(),
 			$factory,
 			new phpbb_mock_event_dispatcher
 		);
+		$user = $this->getMockBuilder('phpbb\\user')->disableOriginalConstructor()->getMock();
+		$parser->configure_user($user);
 
 		$this->assertSame('<t>test</t>', $parser->parse('test'));
 	}
@@ -126,10 +129,11 @@ class phpbb_textformatter_s9e_parser_test extends phpbb_test_case
 		$parser = new \phpbb\textformatter\s9e\parser(
 			$cache,
 			'_foo_parser',
-			$this->getMockBuilder('phpbb\\user')->disableOriginalConstructor()->getMock(),
 			$factory,
 			new phpbb_mock_event_dispatcher
 		);
+		$user = $this->getMockBuilder('phpbb\\user')->disableOriginalConstructor()->getMock();
+		$parser->configure_user($user);
 
 		call_user_func_array(array($parser, $adapter_method), (array) $adapter_arg);
 	}
@@ -191,13 +195,47 @@ class phpbb_textformatter_s9e_parser_test extends phpbb_test_case
 		new \phpbb\textformatter\s9e\parser(
 			$container->get('cache.driver'),
 			'_foo_parser',
-			$container->get('user'),
 			$container->get('text_formatter.s9e.factory'),
 			$dispatcher
 		);
 	}
 
 	public function setup_event_callback($vars)
+	{
+		return isset($vars['parser'])
+			&& $vars['parser'] instanceof \phpbb\textformatter\s9e\parser;
+	}
+
+	/**
+	* @testdox configure_user() triggers a core.text_formatter_s9e_parser_configure_user event
+	*/
+	public function test_configure_user_event()
+	{
+		$container = $this->get_test_case_helpers()->set_s9e_services();
+		$dispatcher = $this->getMock('phpbb\\event\\dispatcher_interface');
+		$dispatcher
+			->expects($this->any())
+			->method('trigger_event')
+			->will($this->returnArgument(1));
+		$dispatcher
+			->expects($this->at(1))
+			->method('trigger_event')
+			->with(
+				'core.text_formatter_s9e_parser_configure_user',
+				$this->callback(array($this, 'configure_user_event_callback'))
+			)
+			->will($this->returnArgument(1));
+
+		$parser = new \phpbb\textformatter\s9e\parser(
+			$container->get('cache.driver'),
+			'_foo_parser',
+			$container->get('text_formatter.s9e.factory'),
+			$dispatcher
+		);
+		$parser->configure_user($container->get('user'));
+	}
+
+	public function configure_user_event_callback($vars)
 	{
 		return isset($vars['parser'])
 			&& $vars['parser'] instanceof \phpbb\textformatter\s9e\parser
@@ -236,7 +274,6 @@ class phpbb_textformatter_s9e_parser_test extends phpbb_test_case
 		$parser = new \phpbb\textformatter\s9e\parser(
 			$container->get('cache.driver'),
 			'_foo_parser',
-			$container->get('user'),
 			$container->get('text_formatter.s9e.factory'),
 			$dispatcher
 		);
@@ -264,5 +301,24 @@ class phpbb_textformatter_s9e_parser_test extends phpbb_test_case
 		$container = $this->get_test_case_helpers()->set_s9e_services();
 		$parser = $container->get('text_formatter.parser');
 		$this->assertInstanceOf('s9e\\TextFormatter\\Parser', $parser->get_parser());
+	}
+
+	/**
+	* This test ensures that get_errors() does not fail even if no user was configured. This is not
+	* something that can happen under normal circumstances, this is purely defensive programming
+	*/
+	public function test_get_error_no_user()
+	{
+		$container = $this->get_test_case_helpers()->set_s9e_services();
+		$parser = $container->get('text_formatter.parser');
+		$parser->set_var('max_font_size', 1);
+
+		// Unset the configured user
+		$property = new \ReflectionProperty(get_class($parser), 'user');
+		$property->setAccessible(true);
+		$property->setValue($parser, null);
+
+		$parser->parse('[size=999999]...[/size]');
+		$this->assertContains('MAX_FONT_SIZE_EXCEEDED', $parser->get_errors());
 	}
 }

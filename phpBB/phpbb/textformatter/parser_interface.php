@@ -24,6 +24,14 @@ interface parser_interface
 	public function parse($text);
 
 	/**
+	* Configure the parser for given user
+	*
+	* @param  \phpbb\user $user
+	* @return null
+	*/
+	public function configure_user(\phpbb\user $user);
+
+	/**
 	* Disable a specific BBCode
 	*
 	* @param  string $name BBCode name
