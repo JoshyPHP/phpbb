@@ -500,7 +500,7 @@ class bbcode
 		global $user;
 
 		static $replacements = array(
-			'quote_username_open'	=> array('{USERNAME}'	=> '$1'),
+			'quote_username_open'	=> array('{USERNAME}'	=> '$1', '{POST_LINK}'			=> '', '{DATE' => ''),
 			'color'					=> array('{COLOR}'		=> '$1', '{TEXT}'			=> '$2'),
 			'size'					=> array('{SIZE}'		=> '$1', '{TEXT}'			=> '$2'),
 			'img'					=> array('{URL}'		=> '$1'),

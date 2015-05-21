@@ -50,7 +50,7 @@ class factory implements \phpbb\textformatter\cache_interface
 		'flash' => array('{WIDTH}' => '{NUMBER1}', '{HEIGHT}' => '{NUMBER2}'),
 		'img'   => array('{URL}' => '{IMAGEURL}'),
 		'list'  => array('{LIST_TYPE}' => '{HASHMAP}'),
-		'quote' => array('{USERNAME}' => '{TEXT1}'),
+		'quote' => array('{DATE}' => '{@date}'),
 		'size'  => array('{SIZE}' => '{FONTSIZE}'),
 		'url'   => array('{DESCRIPTION}' => '{TEXT}'),
 	);
@@ -77,7 +77,12 @@ class factory implements \phpbb\textformatter\cache_interface
 		'quote' =>
 			"[QUOTE
 				author={TEXT1;optional}
+				post_id={UINT;optional}
+				post_time={UINT;optional}
+				post_url={URL;optional}
+				profile_url={URL;optional}
 				url={URL;optional}
+				user_id={UINT;optional}
 				author={PARSE=/^\\[url=(?'url'.*?)](?'author'.*)\\[\\/url]$/i}
 				author={PARSE=/^\\[url](?'author'(?'url'.*?))\\[\\/url]$/i}
 				author={PARSE=/(?'url'https?:\\/\\/[^[\\]]+)/i}
@@ -460,15 +465,6 @@ class factory implements \phpbb\textformatter\cache_interface
 
 		$templates['li'] = $fragments['listitem'] . '<xsl:apply-templates/>' . $fragments['listitem_close'];
 
-		$fragments['quote_username_open'] = str_replace(
-			'{USERNAME}',
-			'<xsl:choose>
-				<xsl:when test="@url">' . str_replace('{DESCRIPTION}', '{USERNAME}', $fragments['url']) . '</xsl:when>
-				<xsl:otherwise>{USERNAME}</xsl:otherwise>
-			</xsl:choose>',
-			$fragments['quote_username_open']
-		);
-
 		$templates['quote'] =
 			'<xsl:choose>
 				<xsl:when test="@author">
@@ -478,6 +474,9 @@ class factory implements \phpbb\textformatter\cache_interface
 					' . $fragments['quote_open'] . '<xsl:apply-templates/>' . $fragments['quote_close'] . '
 				</xsl:otherwise>
 			</xsl:choose>';
+
+		$templates['quote'] = str_replace('{USERNAME}', $fragments['quote_author'], $templates['quote']);
+		$templates['quote'] = str_replace('{POST_LINK}', $fragments['quote_post_link'], $templates['quote']);
 
 		// The [attachment] BBCode uses the inline_attachment template to output a comment that
 		// is post-processed by parse_attachments()

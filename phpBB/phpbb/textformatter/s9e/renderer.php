@@ -215,6 +215,7 @@ class renderer implements \phpbb\textformatter\renderer_interface
 	public function render($xml)
 	{
 		$renderer = $this;
+		$xml = $this->injectQuotesMetadata($xml);
 
 		/**
 		* Modify a parsed text before it is rendered
@@ -251,6 +252,39 @@ class renderer implements \phpbb\textformatter\renderer_interface
 		extract($this->dispatcher->trigger_event('core.text_formatter_s9e_render_after', compact($vars)));
 
 		return $html;
+	}
+
+	/**
+	* Inject dynamic metadata into QUOTE tags in given XML
+	*
+	* @param  string $xml Original XML
+	* @return string      Modified XML
+	*/
+	protected function injectQuotesMetadata($xml)
+	{
+		global $user;
+
+		return \s9e\TextFormatter\Utils::replaceAttributes(
+			$xml,
+			'QUOTE',
+			function ($attributes) use ($user)
+			{
+				if (isset($attributes['post_id']))
+				{
+					$attributes['post_url'] = '#p' . $attributes['post_id'];
+				}
+				if (isset($attributes['post_time']))
+				{
+					$attributes['date'] = 'On ' . $user->format_date($attributes['post_time']) . ', ';
+				}
+				if (isset($attributes['user_id']))
+				{
+					$attributes['profile_url'] = '/path/to/profile/' . $attributes['user_id'];
+				}
+
+				return $attributes;
+			}
+		);
 	}
 
 	/**
