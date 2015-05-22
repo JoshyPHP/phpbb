@@ -13,7 +13,7 @@
 <!-- BEGIN quote_close --></div></blockquote><!-- END quote_close -->
 <!-- BEGIN quote_author -->
 <xsl:choose>
-	<xsl:when test="@url"><a href="{@url}"><xsl:value-of select="@author"/></a></xsl:when>
+	<xsl:when test="@url"><a href="{@url}" class="postlink"><xsl:value-of select="@author"/></a></xsl:when>
 	<xsl:when test="@profile_url"><a href="{@profile_url}"><xsl:value-of select="@author"/></a></xsl:when>
 	<xsl:otherwise><xsl:value-of select="@author"/></xsl:otherwise>
 </xsl:choose>
