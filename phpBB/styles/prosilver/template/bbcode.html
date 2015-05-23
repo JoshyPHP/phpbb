@@ -19,7 +19,10 @@
 </xsl:choose>
 <!-- END quote_author -->
 <!-- BEGIN quote_post_link -->
-<xsl:if test="@post_url"><a href="{@post_url}">&#8593;</a></xsl:if>
+<xsl:if test="@post_url"> <a href="{@post_url}" onclick="if(document.getElementById(this.hash.substr(1)))this.href=this.hash">&#8593;</a></xsl:if>
+<!-- END quote_post_link -->
+<!-- BEGIN quote_date -->
+<xsl:if test="@date"><xsl:value-of select="@date"/> </xsl:if>
 <!-- END quote_post_link -->
 
 <!-- BEGIN code_open --><div class="codebox"><p>{L_CODE}{L_COLON} <a href="#" onclick="selectCode(this); return false;">{L_SELECT_ALL_CODE}</a></p><code><!-- END code_open -->

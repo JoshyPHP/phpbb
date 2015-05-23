@@ -29,6 +29,11 @@ class renderer implements \phpbb\textformatter\renderer_interface
 	protected $dispatcher;
 
 	/**
+	* @var quote_helper
+	*/
+	protected $quote_helper;
+
+	/**
 	* @var \s9e\TextFormatter\Renderer
 	*/
 	protected $renderer;
@@ -110,6 +115,16 @@ class renderer implements \phpbb\textformatter\renderer_interface
 		*/
 		$vars = array('renderer');
 		extract($dispatcher->trigger_event('core.text_formatter_s9e_renderer_setup', compact($vars)));
+	}
+
+	/**
+	* Configure the quote_helper object used to display extended information in quotes
+	*
+	* @param  quote_helper $quote_helper
+	*/
+	public function configure_quote_helper(quote_helper $quote_helper)
+	{
+		$this->quote_helper = $quote_helper;
 	}
 
 	/**
@@ -214,8 +229,11 @@ class renderer implements \phpbb\textformatter\renderer_interface
 	*/
 	public function render($xml)
 	{
+		if (isset($this->quote_helper) && strpos($xml, '<QUOTE ') !== false)
+		{
+			$xml = $this->quote_helper->inject_metadata($xml);
+		}
 		$renderer = $this;
-		$xml = $this->injectQuotesMetadata($xml);
 
 		/**
 		* Modify a parsed text before it is rendered
@@ -252,39 +270,6 @@ class renderer implements \phpbb\textformatter\renderer_interface
 		extract($this->dispatcher->trigger_event('core.text_formatter_s9e_render_after', compact($vars)));
 
 		return $html;
-	}
-
-	/**
-	* Inject dynamic metadata into QUOTE tags in given XML
-	*
-	* @param  string $xml Original XML
-	* @return string      Modified XML
-	*/
-	protected function injectQuotesMetadata($xml)
-	{
-		global $user;
-
-		return \s9e\TextFormatter\Utils::replaceAttributes(
-			$xml,
-			'QUOTE',
-			function ($attributes) use ($user)
-			{
-				if (isset($attributes['post_id']))
-				{
-					$attributes['post_url'] = '#p' . $attributes['post_id'];
-				}
-				if (isset($attributes['post_time']))
-				{
-					$attributes['date'] = 'On ' . $user->format_date($attributes['post_time']) . ', ';
-				}
-				if (isset($attributes['user_id']))
-				{
-					$attributes['profile_url'] = '/path/to/profile/' . $attributes['user_id'];
-				}
-
-				return $attributes;
-			}
-		);
 	}
 
 	/**

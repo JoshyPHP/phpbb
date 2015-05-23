@@ -477,6 +477,7 @@ class factory implements \phpbb\textformatter\cache_interface
 
 		$templates['quote'] = str_replace('{USERNAME}', $fragments['quote_author'], $templates['quote']);
 		$templates['quote'] = str_replace('{POST_LINK}', $fragments['quote_post_link'], $templates['quote']);
+		$templates['quote'] = str_replace('{DATE}', $fragments['quote_date'], $templates['quote']);
 
 		// The [attachment] BBCode uses the inline_attachment template to output a comment that
 		// is post-processed by parse_attachments()
