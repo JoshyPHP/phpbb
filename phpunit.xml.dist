@@ -13,7 +13,7 @@
 >
     <testsuites>
         <testsuite name="phpBB Test Suite">
-            <file>./tests/text_formatter/s9e/default_formatting_test.php</directory>
+            <file>./tests/text_formatter/s9e/default_formatting_test.php</file>
         </testsuite>
     </testsuites>
 
