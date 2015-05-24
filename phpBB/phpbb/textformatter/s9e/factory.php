@@ -79,8 +79,8 @@ class factory implements \phpbb\textformatter\cache_interface
 				author={TEXT1;optional}
 				post_id={UINT;optional}
 				post_time={UINT;optional}
-				post_url={URL;optional}
-				profile_url={URL;optional}
+				post_url={URL;optional;postFilter=#false}
+				profile_url={URL;optional;postFilter=#false}
 				url={URL;optional}
 				user_id={UINT;optional}
 				author={PARSE=/^\\[url=(?'url'.*?)](?'author'.*)\\[\\/url]$/i}
