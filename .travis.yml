@@ -10,5 +10,5 @@ install:
   - travis/setup-phpbb.sh $DB $TRAVIS_PHP_VERSION
 
 script:
-  - sh -c "if [ '$SLOWTESTS' != '1' ]; then phpBB/vendor/bin/phpunit --configuration travis/phpunit-$DB-travis.xml; fi"
+  - phpBB/vendor/bin/phpunit
 
