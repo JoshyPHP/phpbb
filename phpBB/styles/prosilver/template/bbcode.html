@@ -13,6 +13,9 @@
 <!-- BEGIN quote_close --></div></blockquote><!-- END quote_close -->
 <!-- BEGIN quote_extended -->
 <blockquote>
+	<xsl:if test="not(@author)">
+		<xsl:attribute name="class">uncited</xsl:attribute>
+	</xsl:if>
 	<div>
 		<xsl:if test="@author">
 			<cite>
