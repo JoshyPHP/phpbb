@@ -465,19 +465,11 @@ class factory implements \phpbb\textformatter\cache_interface
 
 		$templates['li'] = $fragments['listitem'] . '<xsl:apply-templates/>' . $fragments['listitem_close'];
 
-		$templates['quote'] =
-			'<xsl:choose>
-				<xsl:when test="@author">
-					' . $fragments['quote_username_open'] . '<xsl:apply-templates/>' . $fragments['quote_close'] . '
-				</xsl:when>
-				<xsl:otherwise>
-					' . $fragments['quote_open'] . '<xsl:apply-templates/>' . $fragments['quote_close'] . '
-				</xsl:otherwise>
-			</xsl:choose>';
-
-		$templates['quote'] = str_replace('{USERNAME}', $fragments['quote_author'], $templates['quote']);
-		$templates['quote'] = str_replace('{POST_LINK}', $fragments['quote_post_link'], $templates['quote']);
-		$templates['quote'] = str_replace('{DATE}', $fragments['quote_date'], $templates['quote']);
+		// Replace the regular quote template with the extended quote template if available
+		if (isset($fragments['quote_extended']))
+		{
+			$templates['quote'] = $fragments['quote_extended'];
+		}
 
 		// The [attachment] BBCode uses the inline_attachment template to output a comment that
 		// is post-processed by parse_attachments()
