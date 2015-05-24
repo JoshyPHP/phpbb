@@ -588,6 +588,7 @@ class user extends \phpbb\session
 		}
 
 		$time = new $this->datetime($this, "@$gmepoch", $utc);
+var_dump($this->timezone);
 		$time->setTimezone($this->timezone);
 
 		return $time->format($format, $forcedate);
