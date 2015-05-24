@@ -229,7 +229,7 @@ class renderer implements \phpbb\textformatter\renderer_interface
 	*/
 	public function render($xml)
 	{
-		if (isset($this->quote_helper) && strpos($xml, '<QUOTE ') !== false)
+		if (isset($this->quote_helper))
 		{
 			$xml = $this->quote_helper->inject_metadata($xml);
 		}
