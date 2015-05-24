@@ -50,7 +50,7 @@ class factory implements \phpbb\textformatter\cache_interface
 		'flash' => array('{WIDTH}' => '{NUMBER1}', '{HEIGHT}' => '{NUMBER2}'),
 		'img'   => array('{URL}' => '{IMAGEURL}'),
 		'list'  => array('{LIST_TYPE}' => '{HASHMAP}'),
-		'quote' => array('{DATE}' => '{@date}'),
+		'quote' => array('{USERNAME}' => '{TEXT1}'),
 		'size'  => array('{SIZE}' => '{FONTSIZE}'),
 		'url'   => array('{DESCRIPTION}' => '{TEXT}'),
 	);
