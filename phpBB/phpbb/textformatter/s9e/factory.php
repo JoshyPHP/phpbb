@@ -287,7 +287,7 @@ class factory implements \phpbb\textformatter\cache_interface
 		{
 			$configurator->Emoticons->add(
 				$row['code'],
-				'<img class="smilies" src="{$T_SMILIES_PATH}/' . htmlspecialchars($row['smiley_url']) . '" alt="{.}" title="' . htmlspecialchars($row['emotion']) . '"/>'
+				'<img class="smilies" src="{$T_SMILIES_PATH}' . htmlspecialchars($row['smiley_url']) . '" alt="{.}" title="' . htmlspecialchars($row['emotion']) . '"/>'
 			);
 		}
 
