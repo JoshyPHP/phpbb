@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3f4f026ae8fdec714dd7fb816db22be5",
+    "hash": "0171264308fa25b2b5ac445094aa390a",
     "packages": [
         {
             "name": "bantu/ini-get-wrapper",
@@ -271,7 +271,7 @@
                     "Psr\\Log\\": ""
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -291,16 +291,16 @@
         },
         {
             "name": "s9e/text-formatter",
-            "version": "dev-release/php5.3",
+            "version": "0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/s9e/TextFormatter.git",
-                "reference": "beee0e5693f7ca8ed16a94294acf53b6e6207e7c"
+                "reference": "1f742f17ad0294d52754b9acc6a053e239d26226"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/s9e/TextFormatter/zipball/c065d0e81e7e4666cd13ba4414f4dc7fe8d33dd9",
-                "reference": "beee0e5693f7ca8ed16a94294acf53b6e6207e7c",
+                "url": "https://api.github.com/repos/s9e/TextFormatter/zipball/1f742f17ad0294d52754b9acc6a053e239d26226",
+                "reference": "1f742f17ad0294d52754b9acc6a053e239d26226",
                 "shasum": ""
             },
             "require": {
@@ -346,7 +346,7 @@
                 "parser",
                 "shortcodes"
             ],
-            "time": "2015-07-12 16:53:32"
+            "time": "2015-10-04 10:36:14"
         },
         {
             "name": "symfony/config",
@@ -1236,12 +1236,12 @@
             "target-dir": "Guzzle/Common",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Guzzle3/common.git",
+                "url": "https://github.com/guzzle/common.git",
                 "reference": "bf73c87375f60861f8c7ccc7b95878023ade5306"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Guzzle3/common/zipball/bf73c87375f60861f8c7ccc7b95878023ade5306",
+                "url": "https://api.github.com/repos/guzzle/common/zipball/bf73c87375f60861f8c7ccc7b95878023ade5306",
                 "reference": "bf73c87375f60861f8c7ccc7b95878023ade5306",
                 "shasum": ""
             },
@@ -1272,7 +1272,6 @@
                 "event",
                 "exception"
             ],
-            "abandoned": "guzzle/guzzle",
             "time": "2013-09-08 21:09:18"
         },
         {
@@ -1281,12 +1280,12 @@
             "target-dir": "Guzzle/Http",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Guzzle3/http.git",
+                "url": "https://github.com/guzzle/http.git",
                 "reference": "1034125dfd906b73119e535f03153a62fccb1989"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Guzzle3/http/zipball/1034125dfd906b73119e535f03153a62fccb1989",
+                "url": "https://api.github.com/repos/guzzle/http/zipball/1034125dfd906b73119e535f03153a62fccb1989",
                 "reference": "1034125dfd906b73119e535f03153a62fccb1989",
                 "shasum": ""
             },
@@ -1330,7 +1329,6 @@
                 "http",
                 "http client"
             ],
-            "abandoned": "guzzle/guzzle",
             "time": "2013-09-06 11:34:26"
         },
         {
@@ -1339,12 +1337,12 @@
             "target-dir": "Guzzle/Parser",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Guzzle3/parser.git",
+                "url": "https://github.com/guzzle/parser.git",
                 "reference": "a25c2ddda1c52fb69a4ee56eb530b13ddd9573c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Guzzle3/parser/zipball/a25c2ddda1c52fb69a4ee56eb530b13ddd9573c2",
+                "url": "https://api.github.com/repos/guzzle/parser/zipball/a25c2ddda1c52fb69a4ee56eb530b13ddd9573c2",
                 "reference": "a25c2ddda1c52fb69a4ee56eb530b13ddd9573c2",
                 "shasum": ""
             },
@@ -1375,7 +1373,6 @@
                 "message",
                 "url"
             ],
-            "abandoned": "guzzle/guzzle",
             "time": "2013-07-11 22:46:03"
         },
         {
@@ -1384,12 +1381,12 @@
             "target-dir": "Guzzle/Stream",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Guzzle3/stream.git",
+                "url": "https://github.com/guzzle/stream.git",
                 "reference": "a86111d9ac7db31d65a053c825869409fe8fc83f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Guzzle3/stream/zipball/a86111d9ac7db31d65a053c825869409fe8fc83f",
+                "url": "https://api.github.com/repos/guzzle/stream/zipball/a86111d9ac7db31d65a053c825869409fe8fc83f",
                 "reference": "a86111d9ac7db31d65a053c825869409fe8fc83f",
                 "shasum": ""
             },
@@ -1429,7 +1426,6 @@
                 "component",
                 "stream"
             ],
-            "abandoned": "guzzle/guzzle",
             "time": "2013-07-30 22:07:23"
         },
         {
@@ -2339,8 +2335,7 @@
                 },
                 {
                     "name": "Adam Harvey",
-                    "email": "aharvey@php.net",
-                    "role": "Lead"
+                    "email": "aharvey@php.net"
                 },
                 {
                     "name": "Bernhard Schussek",
@@ -2670,7 +2665,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "s9e/text-formatter": 20,
         "symfony/config": 20,
         "symfony/console": 20,
         "symfony/dependency-injection": 20,
