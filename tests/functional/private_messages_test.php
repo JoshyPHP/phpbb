@@ -16,6 +16,17 @@
 */
 class phpbb_functional_private_messages_test extends phpbb_functional_test_case
 {
+	protected function set_quote_depth($depth)
+	{
+		$crawler = self::request('GET', 'adm/index.php?sid=' . $this->sid . '&i=acp_board&mode=post');
+		$form = $crawler->selectButton('Submit')->form();
+		$values = $form->getValues();
+		$values['config[max_quote_depth]'] = $depth;
+		$form->setValues($values);
+		$crawler = self::submit($form);
+		$this->assertEquals(1, $crawler->filter('.successbox')->count());
+	}
+
 	public function test_setup_config()
 	{
 		$this->login();
@@ -65,5 +76,56 @@ class phpbb_functional_private_messages_test extends phpbb_functional_test_case
 
 		$crawler = self::submit($form);
 		$this->assertContains($this->lang('CONFIG_UPDATED'), $crawler->filter('.successbox')->text());
+	}
+
+	public function test_quote_removal_quote()
+	{
+		$text     = '[quote][quote]2[/quote]1[/quote]0';
+		$expected = "(^\\[quote[^]]*\\]0\\[/quote\\]\\s*$)";
+
+		$this->login();
+		$this->admin_login();
+		$this->set_quote_depth(1);
+
+		$message_id = $this->create_private_message('Test', $text, array(2));
+
+		$crawler = self::request('GET', 'ucp.php?i=pm&mode=compose&action=quote&f=0&p=' . $message_id . '&sid=' . $this->sid);
+
+		$this->assertRegexp($expected, $crawler->filter('textarea#message')->text());
+	}
+
+	public function test_quote_removal_quotepost()
+	{
+		$text     = '[quote]1[/quote]0';
+		$expected = "(\\[/url\\]\\s+\\[quote[^]]*\\]0\\[/quote\\]\\s*$)";
+
+		$this->login();
+		$this->admin_login();
+		$this->set_quote_depth(1);
+
+		$topic = $this->create_topic(2, 'Test Topic 1', 'Test topic');
+		$post  = $this->create_post(2, $topic['topic_id'], 'Re: Test Topic 1', $text);
+
+		$message_id = $this->create_private_message('Test', $text, array(2));
+
+		$crawler = self::request('GET', 'ucp.php?i=pm&mode=compose&action=quotepost&p=' . $post['post_id'] . '&sid=' . $this->sid);
+
+		$this->assertRegexp($expected, $crawler->filter('textarea#message')->text());
+	}
+
+	public function test_quote_removal_forward()
+	{
+		$text     = '[quote][quote]2[/quote]1[/quote]0';
+		$expected = "(To:[^[]*\\[quote[^]]*\\]\\s*0\\s*\\[/quote\\]$)";
+
+		$this->login();
+		$this->admin_login();
+		$this->set_quote_depth(1);
+
+		$message_id = $this->create_private_message('Test', $text, array(2));
+
+		$crawler = self::request('GET', 'ucp.php?i=pm&mode=compose&action=forward&f=0&p=' . $message_id . '&sid=' . $this->sid);
+
+		$this->assertRegexp($expected, $crawler->filter('textarea#message')->text());
 	}
 }

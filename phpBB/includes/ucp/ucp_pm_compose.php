@@ -390,6 +390,17 @@ function compose_pm($id, $mode, $action, $user_folders = array())
 
 		if ($action == 'quotepost')
 		{
+			// Remove nested quotes before decoding, if applicable
+			if ($config['max_quote_depth'] > 0)
+			{
+				$tmp_message_parser = new parse_message();
+				$tmp_message_parser->message = $message_text;
+				$tmp_message_parser->bbcode_uid = $post['bbcode_uid'];
+				$tmp_message_parser->remove_nested_quotes($config['max_quote_depth'] - 1);
+				$message_text = $tmp_message_parser->message;
+				unset($tmp_message_parser);
+			}
+
 			// Decode text for message display
 			decode_message($message_text, $post['bbcode_uid']);
 		}
@@ -921,6 +932,13 @@ function compose_pm($id, $mode, $action, $user_folders = array())
 			);
 		}
 		unset($message_text);
+	}
+
+	// Remove nested quotes before decoding, if applicable
+	if (($action == 'quote' || $action == 'forward') && !$preview && !$refresh && !$submit && $config['max_quote_depth'] > 0)
+	{
+		$message_parser->bbcode_uid = $bbcode_uid;
+		$message_parser->remove_nested_quotes($config['max_quote_depth'] - 1);
 	}
 
 	// Decode text for message display
