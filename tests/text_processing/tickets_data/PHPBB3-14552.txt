@@ -1,0 +1,2 @@
+[center][picture]https://www.phpbb.com/assets/images/images/logo_phpbb.png#hash#tag[/picture][/center]
+[center][picture]https://www.phpbb.com/assets/images/images/logo_phpbb.png?q=v[/picture][picture]https://www.phpbb.com/assets/images/images/logo_phpbb.png?q=(v)[/picture][/center]
