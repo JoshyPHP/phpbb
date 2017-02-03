@@ -557,7 +557,7 @@ function strip_bbcode(&$text, $uid = '')
 function generate_text_for_display($text, $uid, $bitfield, $flags, $censor_text = true)
 {
 	static $bbcode;
-	global $phpbb_dispatcher, $phpbb_container;
+	global $config, $user, $auth, $phpbb_dispatcher, $phpbb_container;
 
 	if ($text === '')
 	{
@@ -581,6 +581,12 @@ function generate_text_for_display($text, $uid, $bitfield, $flags, $censor_text 
 	if (preg_match('#^<[rt][ >]#', $text))
 	{
 		$renderer = $phpbb_container->get('text_formatter.renderer');
+
+		if ($censor_text)
+		{
+			// Based on from censor_text()
+			$censor_text = $user->optionget('viewcensors') || !$config['allow_nocensors'] || !$auth->acl_get('u_chgcensors');
+		}
 
 		// Temporarily switch off viewcensors if applicable
 		$old_censor = $renderer->get_viewcensors();
