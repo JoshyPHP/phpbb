@@ -224,6 +224,14 @@ class phpbb_textformatter_s9e_default_formatting_test extends phpbb_test_case
 				'... <a href="http://www.example.org" class="postlink">www.example.org</a> ...'
 			),
 			array(
+				'... [url]www.example.org[/url] ...',
+				'... <a href="http://www.example.org" class="postlink">www.example.org</a> ...'
+			),
+			array(
+				'... [url]wWw.example.org[/url] ...',
+				'... <a href="http://wWw.example.org" class="postlink">wWw.example.org</a> ...'
+			),
+			array(
 				// From make_clickable_test.php
 				'www.phpbb.com/community/?',
 				'<a href="http://www.phpbb.com/community/" class="postlink">www.phpbb.com/community/</a>?'

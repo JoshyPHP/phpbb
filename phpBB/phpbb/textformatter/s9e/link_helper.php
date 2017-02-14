@@ -65,6 +65,22 @@ class link_helper
 	}
 
 	/**
+	* Prepend a scheme to URLs that start with "www."
+	*
+	* @param  string $url Original URL
+	* @return string      Modified URL
+	*/
+	static public function prepend_scheme($url)
+	{
+		if (stripos($url, 'www.') === 0)
+		{
+			$url = 'http://' . $url;
+		}
+
+		return $url;
+	}
+
+	/**
 	* Test whether we should shorten this tag's text
 	*
 	* Will test whether the tag either does not use any markup or uses a single

@@ -99,7 +99,7 @@ class factory implements \phpbb\textformatter\cache_interface
 			]{TEXT2}[/QUOTE]",
 		'size'  => '[SIZE={FONTSIZE}]{TEXT}[/SIZE]',
 		'u'     => '[U]{TEXT}[/U]',
-		'url'   => '[URL={URL;useContent} $forceLookahead=true]{TEXT}[/URL]',
+		'url'   => '[URL={URL;useContent;preFilter=phpbb\\textformatter\\s9e\\link_helper::prepend_scheme} $forceLookahead=true]{TEXT}[/URL]',
 	);
 
 	/**
@@ -213,6 +213,9 @@ class factory implements \phpbb\textformatter\cache_interface
 		{
 			$configurator->urlConfig->allowScheme(trim($scheme));
 		}
+
+		// Add our helper method to be used in BBCodes
+		$configurator->BBCodes->bbcodeMonkey->allowedFilters[] = 'phpbb\\textformatter\\s9e\\link_helper::prepend_scheme';
 
 		// Convert newlines to br elements by default
 		$configurator->rootRules->enableAutoLineBreaks();
