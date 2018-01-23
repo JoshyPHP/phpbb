@@ -68,20 +68,22 @@ abstract class base implements reparser_interface
 			else
 			{
 				$record += array(
-					'enable_bbcode'    => $this->guess_bbcodes($record),
-					'enable_smilies'   => $this->guess_smilies($record),
-					'enable_magic_url' => $this->guess_magic_url($record),
+					'enable_bbcode'    => true,
+					'enable_smilies'   => true,
+					'enable_magic_url' => true,
 				);
 			}
 		}
 
 		// Those BBCodes are disabled based on context and user permissions and that value is never
-		// stored in the database. Here we test whether they were used in the original text.
+		// stored in the database. However, use of unauthorized BBCodes generally prevents the
+		// content from being posted in the first place, so we assume that any markup that was
+		// successfully posted was allowed.
 		$bbcodes = array('flash', 'img', 'quote', 'url');
 		foreach ($bbcodes as $bbcode)
 		{
 			$field_name = 'enable_' . $bbcode . '_bbcode';
-			$record[$field_name] = $this->guess_bbcode($record, $bbcode);
+			$record[$field_name] = true;
 		}
 
 		// Magic URLs are tied to the URL BBCode, that's why if magic URLs are enabled we make sure
@@ -128,89 +130,6 @@ abstract class base implements reparser_interface
 	public function enable_save()
 	{
 		$this->save_changes = true;
-	}
-
-	/**
-	* Guess whether given BBCode is in use in given record
-	*
-	* @param  array  $record
-	* @param  string $bbcode
-	* @return bool
-	*/
-	protected function guess_bbcode(array $record, $bbcode)
-	{
-		if (!empty($record['bbcode_uid']))
-		{
-			// Look for the closing tag, e.g. [/url]
-			$match = '[/' . $bbcode . ':' . $record['bbcode_uid'];
-			if (strpos($record['text'], $match) !== false)
-			{
-				return true;
-			}
-		}
-
-		if (substr($record['text'], 0, 2) === '<r')
-		{
-			// Look for the closing tag inside of a e element, in an element of the same name, e.g.
-			// <e>[/url]</e></URL>
-			$match = '<e>[/' . $bbcode . ']</e></' . $bbcode . '>';
-			if (stripos($record['text'], $match) !== false)
-			{
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	* Guess whether any BBCode is in use in given record
-	*
-	* @param  array $record
-	* @return bool
-	*/
-	protected function guess_bbcodes(array $record)
-	{
-		if (!empty($record['bbcode_uid']))
-		{
-			// Test whether the bbcode_uid is in use
-			$match = ':' . $record['bbcode_uid'];
-			if (strpos($record['text'], $match) !== false)
-			{
-				return true;
-			}
-		}
-
-		if (substr($record['text'], 0, 2) === '<r')
-		{
-			// Look for a closing tag inside of an e element
-			return (bool) preg_match('(<e>\\[/\\w+\\]</e>)', $match);
-		}
-
-		return false;
-	}
-
-	/**
-	* Guess whether magic URLs are in use in given record
-	*
-	* @param  array $record
-	* @return bool
-	*/
-	protected function guess_magic_url(array $record)
-	{
-		// Look for <!-- m --> or for a URL tag that's not immediately followed by <s>
-		return (strpos($record['text'], '<!-- m -->') !== false || preg_match('(<URL [^>]++>(?!<s>))', $record['text']));
-	}
-
-	/**
-	* Guess whether smilies are in use in given record
-	*
-	* @param  array $record
-	* @return bool
-	*/
-	protected function guess_smilies(array $record)
-	{
-		return (strpos($record['text'], '<!-- s') !== false || strpos($record['text'], '<E>') !== false);
 	}
 
 	/**
