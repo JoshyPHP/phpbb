@@ -99,6 +99,11 @@ abstract class row_based_plugin extends base
 			FROM ' . $this->table . '
 			WHERE ' . $columns['id'] . ' BETWEEN ' . $min_id . ' AND ' . $max_id;
 
+		if (isset($this->filter['text_like']))
+		{
+			$sql .= "\nAND " . $columns['text'] . ' ' . $this->db->sql_like_expression(str_replace('%', $this->db->get_any_char(), $this->filter['text_like']));
+		}
+
 		return $sql;
 	}
 

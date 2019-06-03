@@ -16,6 +16,12 @@ namespace phpbb\textreparser;
 abstract class base implements reparser_interface
 {
 	/**
+	* @var array Record filter
+	* @see reparser_interface::reparse_range()
+	*/
+	protected $filter;
+
+	/**
 	 * @var string The reparser name
 	 */
 	protected $name;
@@ -216,12 +222,37 @@ abstract class base implements reparser_interface
 	/**
 	* {@inheritdoc}
 	*/
-	public function reparse_range($min_id, $max_id)
+	public function reparse_range($min_id, $max_id, array $filter = [])
 	{
+		$this->filter = $filter;
 		foreach ($this->get_records_by_range($min_id, $max_id) as $record)
 		{
-			$this->reparse_record($record);
+			if ($this->record_matches_filter($record))
+			{
+				$this->reparse_record($record);
+			}
 		}
+	}
+
+	/**
+	* Test whether a record matches given filter
+	*
+	* @param  array $record
+	* @return bool
+	*/
+	protected function record_matches_filter(array $record)
+	{
+		$filter = $this->filter;
+		if (isset($filter['text_regexp']) && !preg_match($filter['text_regexp'], $record['text']))
+		{
+			return false;
+		}
+		if (isset($filter['callback']) && !$filter['callback']($record))
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	/**

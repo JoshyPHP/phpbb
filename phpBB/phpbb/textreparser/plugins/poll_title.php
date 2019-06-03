@@ -37,6 +37,11 @@ class poll_title extends \phpbb\textreparser\row_based_plugin
 				AND t.poll_start > 0
 				AND p.post_id = t.topic_first_post_id';
 
+		if (isset($this->filter['text_like']))
+		{
+			$sql .= "\nAND t.poll_title " . $this->db->sql_like_expression(str_replace('%', $this->db->get_any_char(), $this->filter['text_like']));
+		}
+
 		return $sql;
 	}
 }

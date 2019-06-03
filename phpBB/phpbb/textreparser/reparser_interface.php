@@ -39,8 +39,16 @@ interface reparser_interface
 	/**
 	* Reparse all records in given range
 	*
+	* The record filter can contain any of the following elements:
+	*  - text_like:   a SQL LIKE predicate applied on the text, if applicable, e.g. '<r%'
+	*  - text_regexp: a regexp that matches against the text
+	*  - callback:    a callback that accepts a record as argument and returns a boolean
+	*
+	* Only records that match all of the given filters are reparsed.
+	*
 	* @param integer $min_id Lower bound
 	* @param integer $max_id Upper bound
+	* @param array   $filter Record filter, can contain any of 'text_like', 'text_regexp', 'callback'
 	*/
-	public function reparse_range($min_id, $max_id);
+	public function reparse_range($min_id, $max_id, array $filter = []);
 }
