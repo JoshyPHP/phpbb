@@ -38,7 +38,7 @@ class acp_utils implements acp_utils_interface
 	public function analyse_bbcode(string $definition, string $template): array
 	{
 		$configurator = $this->factory->get_configurator();
-		$return       = ['status' => 'valid'];
+		$return       = ['status' => 'safe'];
 		try
 		{
 			$return['name'] = $configurator->BBCodes->addCustom($definition, $template)->tagName;
