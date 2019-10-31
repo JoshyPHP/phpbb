@@ -14,6 +14,7 @@
 namespace phpbb\textformatter\s9e;
 
 use Exception;
+use phpbb\textformatter\acp_utils_interface;
 use s9e\TextFormatter\Configurator\Exceptions\UnsafeTemplateException;
 
 class acp_utils implements acp_utils_interface
@@ -26,7 +27,7 @@ class acp_utils implements acp_utils_interface
 	/**
 	* @param factory $factory
 	*/
-	public function __construct(factory $factory): void
+	public function __construct(factory $factory)
 	{
 		$this->factory = $factory;
 	}
@@ -44,13 +45,13 @@ class acp_utils implements acp_utils_interface
 		}
 		catch (UnsafeTemplateException $e)
 		{
-			$return['status']     = 'invalid_template';
+			$return['status']     = 'unsafe';
 			$return['error_text'] = $e->getMessage();
-			$return['error_html'] = $e->highlightNode();
+			$return['error_html'] = $e->highlightNode('<span class="highlight">');
 		}
 		catch (Exception $e)
 		{
-			$return['status']     = (preg_match('(xml|xpath|xsl)i', $e->getMessage()) ? 'invalid_template' : 'invalid_definition';
+			$return['status']     = (preg_match('(xml|xpath|xsl)i', $e->getMessage())) ? 'invalid_template' : 'invalid_definition';
 			$return['error_text'] = $e->getMessage();
 		}
 
