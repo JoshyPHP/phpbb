@@ -26,7 +26,7 @@ class acp_utils implements acp_utils_interface
 	/**
 	* @param factory $factory
 	*/
-	public function __construct(factory $factory)
+	public function __construct(factory $factory): void
 	{
 		$this->factory = $factory;
 	}
@@ -37,7 +37,7 @@ class acp_utils implements acp_utils_interface
 	public function analyse_bbcode(string $definition, string $template): array
 	{
 		$configurator = $this->factory->get_configurator();
-		$return       = ['name' => '?', 'status' => 'valid'];
+		$return       = ['status' => 'valid'];
 		try
 		{
 			$return['name'] = $configurator->BBCodes->addCustom($definition, $template)->tagName;

@@ -19,14 +19,14 @@ interface acp_utils_interface
 	* Analyse given BBCode definition for issues and safeness
 	*
 	* Required elements in the return array:
-	*  - name:                  Name of the BBCode based on the definition
 	*  - status:
-	*    - "safe"               The BBCode can be safely used by anyone.
+	*    - "safe"               The BBCode is valid and can be safely used by anyone.
 	*    - "unsafe"             The BBCode is valid but may be unsafe to use.
 	*    - "invalid_definition" There is an issue with the definition.
 	*    - "invalid_template"   There is an issue with the template.
 	*
 	* Optional elements in the return array:
+	*  - name:       Name of the BBCode based on the definition.
 	*  - error_text: Textual description of the issue in plain text or as a L_* string.
 	*  - error_html: Visual description of the issue in HTML.
 	*
