@@ -26,7 +26,7 @@ interface acp_utils_interface
 	*    - "invalid_template"   There is an issue with the template.
 	*
 	* Optional elements in the return array:
-	*  - name:       Name of the BBCode based on the definition.
+	*  - name:       Name of the BBCode based on the definition. Required if status is "valid".
 	*  - error_text: Textual description of the issue in plain text or as a L_* string.
 	*  - error_html: Visual description of the issue in HTML.
 	*
