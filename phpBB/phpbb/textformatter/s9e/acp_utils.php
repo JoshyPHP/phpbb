@@ -16,6 +16,7 @@ namespace phpbb\textformatter\s9e;
 use Exception;
 use phpbb\textformatter\acp_utils_interface;
 use s9e\TextFormatter\Configurator\Exceptions\UnsafeTemplateException;
+use s9e\TextFormatter\Configurator\Items\UnsafeTemplate;
 
 class acp_utils implements acp_utils_interface
 {
@@ -39,9 +40,16 @@ class acp_utils implements acp_utils_interface
 	{
 		$configurator = $this->factory->get_configurator();
 		$return       = ['status' => 'safe'];
+
+		// Capture and normalize the BBCode name manually
+		if (preg_match('(\\[([-\\w]++))', $definition, $m))
+		{
+			$return['name'] = strtoupper($m[1]);
+		}
+
 		try
 		{
-			$return['name'] = $configurator->BBCodes->addCustom($definition, $template)->tagName;
+			$configurator->BBCodes->addCustom($definition, $template);
 		}
 		catch (UnsafeTemplateException $e)
 		{
