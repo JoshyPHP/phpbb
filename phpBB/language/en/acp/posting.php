@@ -56,6 +56,7 @@ $lang = array_merge($lang, array(
 
 	'BBCODE_INVALID_TAG_NAME'	=> 'The BBCode tag name that you selected already exists.',
 	'BBCODE_INVALID'			=> 'Your BBCode is constructed in an invalid form.',
+	'BBCODE_INVALID_TEMPLATE'	=> 'Your BBCode\'s template is invalid.',
 	'BBCODE_TAG'				=> 'Tag',
 	'BBCODE_TAG_TOO_LONG'		=> 'The tag name you selected is too long.',
 	'BBCODE_TAG_DEF_TOO_LONG'	=> 'The tag definition that you have entered is too long, please shorten your tag definition.',

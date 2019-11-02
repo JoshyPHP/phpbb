@@ -41,7 +41,8 @@ class acp_utils implements acp_utils_interface
 		$configurator = $this->factory->get_configurator();
 		$return       = ['status' => 'safe'];
 
-		// Capture and normalize the BBCode name manually
+		// Capture and normalize the BBCode name manually because there's no easy way to retrieve
+		// it in TextFormatter <= 2.x
 		if (preg_match('(\\[([-\\w]++))', $definition, $m))
 		{
 			$return['name'] = strtoupper($m[1]);
