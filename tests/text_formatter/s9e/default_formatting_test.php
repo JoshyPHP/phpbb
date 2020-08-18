@@ -45,6 +45,47 @@ class phpbb_textformatter_s9e_default_formatting_test extends phpbb_test_case
 		$this->assertSame($expected, $renderer->render($parsed_text));
 	}
 
+	/**
+	* @coversNothing
+	* @dataProvider get_default_formatting_tests
+	*/
+	public function test_default_formatting_from_bundle($original, $expected, $setup = null)
+	{
+		// Force the configurator to fail and fall back to the bundled instances
+		$dispatcher = $this->getMockBuilder('phpbb_mock_event_dispatcher')->getMock();
+		$dispatcher->expects($this->any())
+			->method('trigger_event')
+			->will($this->returnCallback(__CLASS__ . '::sabotage_configurator'));
+
+		$container = new phpbb_mock_container_builder;
+		$container->set('dispatcher', $dispatcher);
+
+		$fixture   = __DIR__ . '/fixtures/default_formatting.xml';
+		$container = $this->get_test_case_helpers()->set_s9e_services($container, $fixture);
+
+		$parser   = $container->get('text_formatter.parser');
+		$renderer = $container->get('text_formatter.renderer');
+
+		if (isset($setup))
+		{
+			call_user_func($setup, $container);
+		}
+
+		$parsed_text = $parser->parse($original);
+
+		$this->assertSame($expected, $renderer->render($parsed_text));
+	}
+
+	public function sabotage_configurator($event_name)
+	{
+		if ($event_name === 'core.text_formatter_s9e_configure_before')
+		{
+			throw new \Exception('Thrown by ' . __METHOD__);
+		}
+
+		return [];
+	}
+
 	public function get_default_formatting_tests()
 	{
 		return array(

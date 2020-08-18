@@ -751,6 +751,8 @@ $lang = array_merge($lang, array(
 	// @deprecated 3.1
 	'LOG_TEMPLATE_REFRESHED'		=> '<strong>Refreshed template set</strong><br />» %s',
 
+	'LOG_TEXT_FORMATTER_FACTORY_ERROR'	=> '<strong>An error occurred while generating a text formatter</strong><br />» %s',
+
 	// @deprecated 3.1
 	'LOG_THEME_ADD_DB'			=> '<strong>Added new theme to database</strong><br />» %s',
 	// @deprecated 3.1

@@ -13,6 +13,7 @@
 
 namespace phpbb\textformatter\s9e;
 
+use Exception;
 use s9e\TextFormatter\Configurator;
 use s9e\TextFormatter\Configurator\Items\AttributeFilters\RegexpFilter;
 use s9e\TextFormatter\Configurator\Items\UnsafeTemplate;
@@ -384,6 +385,48 @@ class factory implements \phpbb\textformatter\cache_interface
 	*/
 	public function regenerate()
 	{
+		try
+		{
+			$objects = $this->generate_new_instances();
+		}
+		catch (Exception $e)
+		{
+			$this->log->add('critical', null, null, 'LOG_TEXT_FORMATTER_FACTORY_ERROR', false, [$e->getMessage()]);
+
+			$objects = $this->get_bundled_instances();
+		}
+
+		$parser   = $objects['parser'];
+		$renderer = $objects['renderer'];
+		$censor   = $objects['censor'] ?? null;
+
+		// Cache the parser as-is
+		$this->cache->put($this->cache_key_parser, $parser);
+
+		// We need to cache the name of the renderer's generated class
+		$renderer_data = array('class' => get_class($renderer));
+		if (isset($censor))
+		{
+			$renderer_data['censor'] = $censor;
+		}
+		$this->cache->put($this->cache_key_renderer, $renderer_data);
+
+		return array('parser' => $parser, 'renderer' => $renderer);
+	}
+
+	/**
+	* Generate new instances of a parser, a renderer, and optionally a censor
+	*
+	* Returned objects' classes:
+	*
+	*  - censor:   s9e\TextFormatter\Plugins\Censor\Helper
+	*  - parser:   s9e\TextFormatter\Parser
+	*  - renderer: s9e\TextFormatter\Renderer
+	*
+	* @return array Associative array of objects
+	*/
+	protected function generate_new_instances()
+	{
 		$configurator = $this->get_configurator();
 
 		// Get the censor helper and remove the Censor plugin if applicable
@@ -406,21 +449,25 @@ class factory implements \phpbb\textformatter\cache_interface
 		$vars = array('objects');
 		extract($this->dispatcher->trigger_event('core.text_formatter_s9e_configure_finalize', compact($vars)));
 
-		$parser   = $objects['parser'];
-		$renderer = $objects['renderer'];
-
-		// Cache the parser as-is
-		$this->cache->put($this->cache_key_parser, $parser);
-
-		// We need to cache the name of the renderer's generated class
-		$renderer_data = array('class' => get_class($renderer));
 		if (isset($censor))
 		{
-			$renderer_data['censor'] = $censor;
+			$objects['censor'] = $censor;
 		}
-		$this->cache->put($this->cache_key_renderer, $renderer_data);
 
-		return array('parser' => $parser, 'renderer' => $renderer);
+		return $objects;
+	}
+
+	/**
+	* Return the pre-configured parser and renderer instances
+	*
+	* @return array
+	*/
+	protected function get_bundled_instances()
+	{
+		return [
+			'parser'   => default_bundle::getParser(),
+			'renderer' => default_bundle::getRenderer()
+		];
 	}
 
 	/**
