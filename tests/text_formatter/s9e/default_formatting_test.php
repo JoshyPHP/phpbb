@@ -11,6 +11,8 @@
 *
 */
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 class phpbb_textformatter_s9e_default_formatting_test extends phpbb_test_case
 {
 	public function test_bbcode_code_lang_is_saved()
@@ -29,20 +31,7 @@ class phpbb_textformatter_s9e_default_formatting_test extends phpbb_test_case
 	*/
 	public function test_default_formatting($original, $expected, $setup = null)
 	{
-		$fixture   = __DIR__ . '/fixtures/default_formatting.xml';
-		$container = $this->get_test_case_helpers()->set_s9e_services(null, $fixture);
-
-		$parser   = $container->get('text_formatter.parser');
-		$renderer = $container->get('text_formatter.renderer');
-
-		if (isset($setup))
-		{
-			call_user_func($setup, $container);
-		}
-
-		$parsed_text = $parser->parse($original);
-
-		$this->assertSame($expected, $renderer->render($parsed_text));
+		$this->run_default_formatting_test($original, $expected, $setup);
 	}
 
 	/**
@@ -60,6 +49,21 @@ class phpbb_textformatter_s9e_default_formatting_test extends phpbb_test_case
 		$container = new phpbb_mock_container_builder;
 		$container->set('dispatcher', $dispatcher);
 
+		$this->run_default_formatting_test($original, $expected, $setup, $container);
+	}
+
+	static public function sabotage_configurator($event_name)
+	{
+		if ($event_name === 'core.text_formatter_s9e_configure_before')
+		{
+			throw new \Exception('Thrown by ' . __METHOD__);
+		}
+
+		return [];
+	}
+
+	protected function run_default_formatting_test($original, $expected, $setup = null, ContainerInterface $container = null)
+	{
 		$fixture   = __DIR__ . '/fixtures/default_formatting.xml';
 		$container = $this->get_test_case_helpers()->set_s9e_services($container, $fixture);
 
@@ -73,17 +77,7 @@ class phpbb_textformatter_s9e_default_formatting_test extends phpbb_test_case
 
 		$parsed_text = $parser->parse($original);
 
-		$this->assertSame($expected, $renderer->render($parsed_text));
-	}
-
-	public function sabotage_configurator($event_name)
-	{
-		if ($event_name === 'core.text_formatter_s9e_configure_before')
-		{
-			throw new \Exception('Thrown by ' . __METHOD__);
-		}
-
-		return [];
+		$this->assertEquals($expected, $renderer->render($parsed_text));
 	}
 
 	public function get_default_formatting_tests()
